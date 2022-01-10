@@ -5,12 +5,13 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import './assets/styles/index.css';
 
-import HomePage from './components/pages/HomePage'; 
-import UserPage from './components/pages/UserPage';
-import LoginPage from './components/pages/LoginPage';
 import ErrorPage from './components/pages/ErrorPage';
+import HomePage from './components/pages/HomePage';
+import LoginPage from './components/pages/LoginPage';
+import RegisterPage from './components/pages/RegisterPage';
+import UserPage from './components/pages/UserPage';
+import UploadPage from './components/pages/UploadPage';
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
@@ -21,6 +22,8 @@ ReactDOM.render(
         <Route path=":id" element={<UserPage />} />
       </Route>
       <Route path="login" element={<LoginPage />} />
+      <Route path="register" element={<RegisterPage />} />
+      <Route path="account/upload" element={<UploadPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   </BrowserRouter>,
