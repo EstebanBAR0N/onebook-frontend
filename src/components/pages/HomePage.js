@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Navbar from '../Navbar';
+import { useTheme } from "@material-ui/core/styles";
+
+import '../../assets/styles/index.css';
 
 var users = [
   {
@@ -25,9 +30,11 @@ var users = [
 ];
 
 function HomePage() {
+  const theme = useTheme();
+
   return (
-    <div class="home-main-container">
-      <h1>Home Page</h1>
+    <Box style={{ backgroundColor: theme.palette.BG.main }}>
+      <Navbar></Navbar>
       <nav>
         {users.map(user => (
             <Link
@@ -41,7 +48,7 @@ function HomePage() {
         <br/>
         <Link to="/login">Login</Link>
       </nav>
-    </div>
+    </Box>
   );
 }
 
