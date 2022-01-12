@@ -1,53 +1,49 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Navbar from '../Navbar';
 import { useTheme } from "@material-ui/core/styles";
+import Typography from "@mui/material/Typography";
 
 import '../../assets/styles/index.css';
 
-var users = [
-  {
-    name: "Bowser",
-    number: 1,
-  },
-  {
-    name: "Sonic",
-    number: 2,
-  },
-  {
-    name: "Mario",
-    number: 3,
-  },
-  {
-    name: "Luigi",
-    number: 4,
-  },
-  {
-    name: "Peach",
-    number: 5,
-  }
-];
+import Navbar from '../Navbar';
+import UserPreview from '../UserPreview';
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 function HomePage() {
   const theme = useTheme();
 
   return (
     <Box style={{ backgroundColor: theme.palette.BG.main }}>
-      <Navbar></Navbar>
-      <nav>
-        {users.map(user => (
-            <Link
-              to={`/user/${user.number}`}
-              key={user.number}
-            >
-              {user.name}
-              <br/> 
-            </Link>
-        ))}
-        <br/>
-        <Link to="/login">Login</Link>
-      </nav>
+      <Navbar />
+      <UserPreview />
+      {/* Footer */}
+      {/* <Box sx={{ height: '1em', bgcolor: 'background.paper', p: 6 }} component="footer">
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Something here to give the footer a purpose!
+        </Typography>
+        <Copyright />
+      </Box> */}
     </Box>
   );
 }
