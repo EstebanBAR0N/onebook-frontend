@@ -61,7 +61,7 @@ function MobileMenuPage() {
             marginTop: '3em',
         }}>
           <Link to="" style={{ color: 'white', fontSize: '25px', textDecoration: "none" }}>
-            Compte
+            Profil
           </Link>
         </Grid>
         <Grid item sx={{ 
