@@ -9,6 +9,7 @@ import {
 import ErrorPage from './components/pages/ErrorPage';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
+import MobileMenu from './components/pages/MobileMenuPage';
 import RegisterPage from './components/pages/RegisterPage';
 import UserPage from './components/pages/UserPage';
 import UploadPage from './components/pages/UploadPage';
@@ -33,6 +34,7 @@ ReactDOM.render(
             <Route path="user" element={<UserPage />}>
               <Route path=":id" element={<UserPage />} />
             </Route>
+            <Route path="mobileMenu" element={<MobileMenu />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="account/upload" element={<UploadPage />} />

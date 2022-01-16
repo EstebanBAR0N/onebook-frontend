@@ -2,7 +2,7 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
@@ -23,13 +23,6 @@ const Search = styled('div')(({ theme }) => ({
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.DARK_GREY.main, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
   },
 }));
 
@@ -106,123 +99,73 @@ function Navbar() {
     </Menu>
   );
 
-  // const mobileMenuId = 'primary-search-account-menu-mobile';
-  // const renderMobileMenu = (
-  //   <Menu
-  //     anchorEl={mobileMoreAnchorEl}
-  //     anchorOrigin={{
-  //       vertical: 'top',
-  //       horizontal: 'right',
-  //     }}
-  //     id={mobileMenuId}
-  //     keepMounted
-  //     transformOrigin={{
-  //       vertical: 'top',
-  //       horizontal: 'right',
-  //     }}
-  //     open={isMobileMenuOpen}
-  //     onClose={handleMobileMenuClose}
-  //   >
-  //     <MenuItem>
-  //       <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-  //         <Badge badgeContent={4} color="error">
-  //           <MailIcon />
-  //         </Badge>
-  //       </IconButton>
-  //       <p>Messages</p>
-  //     </MenuItem>
-  //     <MenuItem>
-  //       <IconButton
-  //         size="large"
-  //         aria-label="show 17 new notifications"
-  //         color="inherit"
-  //       >
-  //         <Badge badgeContent={17} color="error">
-  //           <NotificationsIcon />
-  //         </Badge>
-  //       </IconButton>
-  //       <p>Notifications</p>
-  //     </MenuItem>
-  //     <MenuItem onClick={handleProfileMenuOpen}>
-  //       <IconButton
-  //         size="large"
-  //         aria-label="account of current user"
-  //         aria-controls="primary-search-account-menu"
-  //         aria-haspopup="true"
-  //         color="inherit"
-  //       >
-  //         <AccountCircle />
-  //       </IconButton>
-  //       <p>Profile</p>
-  //     </MenuItem>
-  //   </Menu>
-  // );
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ color: theme.palette.DARK_GREY.main, backgroundColor: theme.palette.WHITE.main }}>
-        <Toolbar>
-          <OneBookButton />
-
-          <Box sx={{ flexGrow: 1 }} />
-
-          <Search sx={{ 
-            backgroundColor: theme.palette.BG.main, 
-            borderRadius: 45,
-            width: { xs: '40%', md: '25%' },
-            height: { xs: '20%', md: '100%' }
-          }}>
-            <SearchIconWrapper>
-              <SearchIcon sx={{ fontSize: { xs: '1em', md: '1.5em' } }}/>
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              sx={{ fontSize: { xs: '80%', md: '100%' } }}
-            />
-          </Search>
-
-          <Box sx={{ flexGrow: 1 }} />
-          
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" color="inherit">
+        <Grid container sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr' }}>
+          <Grid item sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', marginLeft: { xs: 1, sm: 2, md: 4 } }}>
+            <OneBookButton />
+          </Grid>
+          <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+            <Search sx={{
+              backgroundColor: theme.palette.BG.main,
+              borderRadius: 45,
+              width: { xs: '85%', sm: '60%', md: '50%' },
+              height: '60%',
+              display: 'flex',
+              justifyContent: 'start',
+              alignItems: 'center',
+            }}>
+              <SearchIconWrapper>
+                <SearchIcon sx={{ fontSize: { xs: '1em', sm: '1.2em', md: '1.5em' } }} />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                sx={{ fontSize: { xs: '70%', sm: '85%', md: '100%' }, width: '100%' }}
+              />
+            </Search>
+          </Grid>
+          <Grid item sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginRight: { xs: 1, sm: 2, md: 4 } }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <IconButton size="large" color="inherit">
                 <AddCircleOutlineIcon sx={{ fontSize: '1.3em' }} />
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <NotificationsIcon sx={{ fontSize: '1.3em' }} />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle sx={{ fontSize: '1.3em' }} />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-haspopup="true"
-              // onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
+              </IconButton>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={0} color="error">
+                  <NotificationsIcon sx={{ fontSize: '1.3em' }} />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle sx={{ fontSize: '1.3em' }} />
+              </IconButton>
+            </Box>
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-haspopup="true"
+                // onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+          </Grid>
+        </Grid>
       </AppBar>
-      {/* {renderMobileMenu} */}
       {renderMenu}
     </Box>
   );

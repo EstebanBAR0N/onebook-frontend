@@ -12,7 +12,7 @@ function OneBookButton() {
   return (
     <Box container>
       <Typography sx={{ 
-        fontSize: { xs: "18px", md: "30px" }, 
+        fontSize: { xs: "20px", sm: "24px", md: "30px" }, 
         marginRight: { xs: "1em" },
         color: theme.palette.primary.main 
       }}>
