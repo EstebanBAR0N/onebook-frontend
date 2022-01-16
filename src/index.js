@@ -5,7 +5,11 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
+import mainTheme from './assets/themes/mainTheme';
 
+// custom components
 import ErrorPage from './components/pages/ErrorPage';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
@@ -14,12 +18,8 @@ import RegisterPage from './components/pages/RegisterPage';
 import UserPage from './components/pages/UserPage';
 import UploadPage from './components/pages/UploadPage';
 
-// définition du theme pour toutes les pages
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
-import mainTheme from './assets/themes/mainTheme';
-
 import './assets/styles/index.css';
+
 
 const theme = createTheme(mainTheme);
 

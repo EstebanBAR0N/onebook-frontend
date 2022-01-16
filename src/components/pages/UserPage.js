@@ -9,7 +9,7 @@ function UserPage() {
     return;
   }
   return (
-    <div class="user-main-container">
+    <div className="user-main-container">
       <h1>User Page</h1>
       <nav>
         <Link to="/">Home</Link>

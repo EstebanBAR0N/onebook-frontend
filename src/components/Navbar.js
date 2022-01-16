@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import { styled, alpha } from '@mui/material/styles';
+import { useTheme } from "@material-ui/styles";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -14,7 +15,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { useTheme } from "@material-ui/styles";
 
 import OneBookButton from './OneBookButton';
 
@@ -105,12 +105,25 @@ function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ color: theme.palette.DARK_GREY.main, backgroundColor: 'white' }}>
+      <AppBar position="static" sx={{ 
+        color: theme.palette.DARK_GREY.main, 
+        backgroundColor: 'white' 
+      }}>
         <Grid container sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr' }}>
-          <Grid item sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', marginLeft: { xs: 1, sm: 2, md: 4 } }}>
+          <Grid item sx={{ 
+            display: 'flex', 
+            justifyContent: 'start', 
+            alignItems: 'center', 
+            marginLeft: { xs: 1, sm: 2, md: 4 } 
+          }}>
             <OneBookButton />
           </Grid>
-          <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+          <Grid item sx={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            width: '100%' 
+          }}>
             <Search sx={{
               backgroundColor: theme.palette.BG.main,
               borderRadius: 45,
@@ -130,7 +143,12 @@ function Navbar() {
               />
             </Search>
           </Grid>
-          <Grid item sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginRight: { xs: 1, sm: 2, md: 4 } }}>
+          <Grid item sx={{ 
+            display: 'flex', 
+            justifyContent: 'end', 
+            alignItems: 'center', 
+            marginRight: { xs: 1, sm: 2, md: 4 } 
+          }}>
             <Box sx={{ display: { xs: 'none', md: (!userConnected ? 'flex' : 'none') } }}>
               <Link to="/login" style={{
                 color: theme.palette.TEXT.main, 
@@ -143,7 +161,7 @@ function Navbar() {
             </Box>
             <Box sx={{ display: { xs: 'none', md: (userConnected ? 'flex' : 'none') } }}>
               <IconButton size="large" color="inherit">
-                <AddCircleOutlineIcon sx={{ fontSize: '1.3em' }} />
+                <AddCircleOutlineIcon sx={{ fontSize: '1.2em' }} />
               </IconButton>
               <IconButton
                 size="large"
@@ -151,7 +169,7 @@ function Navbar() {
                 color="inherit"
               >
                 <Badge badgeContent={0} color="error">
-                  <NotificationsIcon sx={{ fontSize: '1.3em' }} />
+                  <NotificationsIcon sx={{ fontSize: '1.2em' }} />
                 </Badge>
               </IconButton>
               <IconButton
@@ -163,7 +181,7 @@ function Navbar() {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle sx={{ fontSize: '1.3em' }} />
+                <AccountCircle sx={{ fontSize: '1.2em' }} />
               </IconButton>
             </Box>
             <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
