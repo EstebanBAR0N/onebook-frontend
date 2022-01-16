@@ -77,6 +77,10 @@ function Navbar() {
     window.location.href = '/user/'+userId;
   };
 
+  const goToUploadPage = () => {
+    window.location.href = '/account/upload';
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -160,7 +164,7 @@ function Navbar() {
               </Link>
             </Box>
             <Box sx={{ display: { xs: 'none', md: (userConnected ? 'flex' : 'none') } }}>
-              <IconButton size="large" color="inherit">
+              <IconButton size="large" color="inherit" onClick={goToUploadPage}>
                 <AddCircleOutlineIcon sx={{ fontSize: '1.2em' }} />
               </IconButton>
               <IconButton
