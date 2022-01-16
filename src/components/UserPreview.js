@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -6,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import UserImageList from './UserImageList';
 
 
-function UserPreview() {
+function UserPreview(props) {
   const theme = useTheme();
 
   return (
@@ -22,11 +23,16 @@ function UserPreview() {
             marginLeft: { xs: 2, md: 4 },
             marginBottom: '-3px',
             fontSize: { xs: '17px', sm: '18px', md: '21px' },
-            fontFamily: 'Arsenal',
-            color: theme.palette.TEXT.main
           }}
           >
-            Neb_illust
+            <Link to={'/user/'+props.userId} style={{
+              fontFamily: 'Arsenal', 
+              textDecoration: "none", 
+              color: theme.palette.TEXT.main
+            }}
+            >
+              Neb_illust
+            </Link>
           </Typography>
         </Box>
       </Grid>

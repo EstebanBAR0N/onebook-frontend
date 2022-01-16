@@ -15,7 +15,7 @@ function UsersList() {
           <ListItem key={user} sx={{ 
             marginTop: { xs: (user === 1 ? 2 : 10), md: (user === 1 ? 5 : 20) },
           }}>
-            <UserPreview />
+            <UserPreview userId={user} />
           </ListItem>
         ))}
       </List>
