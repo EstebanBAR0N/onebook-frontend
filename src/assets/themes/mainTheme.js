@@ -3,9 +3,6 @@ const mainTheme = {
         primary: {
             main : "#5D55C1",
         },
-        WHITE : {
-            main: "#FFFFFF",
-        },
         BG : {
             main: "#EEEDF3",
         }, 

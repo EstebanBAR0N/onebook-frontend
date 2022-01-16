@@ -16,7 +16,7 @@ import UploadPage from './components/pages/UploadPage';
 
 // définition du theme pour toutes les pages
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { MuiThemeProvider,StylesProvider } from "@material-ui/core/styles";
+import { MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import mainTheme from './assets/themes/mainTheme';
 
 import './assets/styles/index.css';

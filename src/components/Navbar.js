@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -63,18 +64,18 @@ function Navbar() {
     setAnchorEl(event.currentTarget);
   };
 
-  // const handleMobileMenuClose = () => {
-  //   setMobileMoreAnchorEl(null);
-  // };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    // handleMobileMenuClose();
   };
 
-  // const handleMobileMenuOpen = (event) => {
-  //   setMobileMoreAnchorEl(event.currentTarget);
-  // };
+  const goToMobileMenu = () => {
+    window.location.href = '/MobileMenu';
+  };
+
+  const goToMyBook = () => {
+    const userId = 1;
+    window.location.href = '/user/'+userId;
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -99,9 +100,12 @@ function Navbar() {
     </Menu>
   );
 
+  // temp variables
+  let userConnected = true;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ color: theme.palette.DARK_GREY.main, backgroundColor: theme.palette.WHITE.main }}>
+      <AppBar position="static" sx={{ color: theme.palette.DARK_GREY.main, backgroundColor: 'white' }}>
         <Grid container sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr' }}>
           <Grid item sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', marginLeft: { xs: 1, sm: 2, md: 4 } }}>
             <OneBookButton />
@@ -127,7 +131,17 @@ function Navbar() {
             </Search>
           </Grid>
           <Grid item sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginRight: { xs: 1, sm: 2, md: 4 } }}>
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ display: { xs: 'none', md: (!userConnected ? 'flex' : 'none') } }}>
+              <Link to="/login" style={{
+                color: theme.palette.TEXT.main, 
+                fontFamily: 'Arsenal',
+                fontSize: '20px', 
+                textDecoration: "none" 
+              }}>
+                Se connecter
+              </Link>
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: (userConnected ? 'flex' : 'none') } }}>
               <IconButton size="large" color="inherit">
                 <AddCircleOutlineIcon sx={{ fontSize: '1.3em' }} />
               </IconButton>
@@ -152,15 +166,21 @@ function Navbar() {
                 <AccountCircle sx={{ fontSize: '1.3em' }} />
               </IconButton>
             </Box>
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
               <IconButton
                 size="large"
-                aria-label="show more"
-                aria-haspopup="true"
-                // onClick={handleMobileMenuOpen}
+                color="inherit"
+                onClick={goToMyBook}
+                sx={{ display: (userConnected ? 'flex' : 'none') }}
+              >
+                <AccountCircle />
+              </IconButton>
+              <IconButton
+                size="large"
+                onClick={goToMobileMenu}
                 color="inherit"
               >
-                <MenuIcon />
+                <MenuIcon sx={{ marginLeft: '-0.5em' }} />
               </IconButton>
             </Box>
           </Grid>
