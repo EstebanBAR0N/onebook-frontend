@@ -68,6 +68,15 @@ function Navbar() {
     setAnchorEl(null);
   };
 
+  const goToHome = () => {
+    // déconnecter le user
+    window.location.href = '/';
+  };
+
+  const goToProfil = () => {
+    // go to profil
+  }
+
   const goToMobileMenu = () => {
     window.location.href = '/MobileMenu';
   };
@@ -98,9 +107,9 @@ function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profil</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Mon book</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Déconnexion</MenuItem>
+      <MenuItem onClick={goToProfil}>Profil</MenuItem>
+      <MenuItem onClick={goToMyBook}>Mon book</MenuItem>
+      <MenuItem onClick={goToHome}>Déconnexion</MenuItem>
     </Menu>
   );
 

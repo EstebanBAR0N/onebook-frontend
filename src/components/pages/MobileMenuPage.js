@@ -10,6 +10,7 @@ function MobileMenuPage() {
 
   // temp variables
   let userConnected = false;
+  let userId = 1;
 
   return (
     <Box sx={{ 
@@ -43,7 +44,7 @@ function MobileMenuPage() {
           marginLeft: '3em', 
           marginBottom: '3em',
         }}>
-          <Link to="/" style={{ color: 'white', fontSize: '35px', textDecoration: "none" }}>
+          <Link to={'/user/'+userId} style={{ color: 'white', fontSize: '35px', textDecoration: "none" }}>
             Mon book
           </Link>
         </Grid>
@@ -59,6 +60,7 @@ function MobileMenuPage() {
             justifyContent: 'start',  
             marginLeft: '3em',
             marginTop: '3em',
+            marginBottom: '0.5em',
         }}>
           <Link to="" style={{ color: 'white', fontSize: '25px', textDecoration: "none" }}>
             Profil
@@ -68,7 +70,6 @@ function MobileMenuPage() {
           display: 'flex', 
           justifyContent: 'start', 
           marginLeft: '3em', 
-          marginBottom: '2em',
         }}>
           <Link to="/login" style={{
             display: (!userConnected ? 'flex' : 'none'),

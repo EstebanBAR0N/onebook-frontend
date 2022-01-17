@@ -25,7 +25,7 @@ function RegisterPage() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ height: '100vh' }}>
       <CssBaseline />
       <HomeButton />
       <Box
