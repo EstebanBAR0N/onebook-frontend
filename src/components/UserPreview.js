@@ -4,11 +4,24 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import UserImageList from './UserImageList';
 
+import UserImageList from './UserImageList';
+import ImageModal from './ImageModal';
 
 function UserPreview(props) {
   const theme = useTheme();
+
+  const [url, setUrl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  function handleImageClick(evt) {
+    setUrl(evt.target.srcset);
+    if (window.innerWidth >= 650) {
+      setOpen(true);
+    }
+  }
+
+  const handleClose = () => setOpen(false);
 
   return (
     <Grid container spacing={2} sx={{ mt: 2 }}>
@@ -38,9 +51,10 @@ function UserPreview(props) {
       </Grid>
       <Grid item xs={12}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
-          <UserImageList></UserImageList>
+          <UserImageList onClick={handleImageClick} />
         </Box>
       </Grid>
+      <ImageModal handleClose={handleClose} url={url} show={open} />
     </Grid>
   );
 }

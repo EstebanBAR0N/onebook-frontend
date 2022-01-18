@@ -5,7 +5,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 
 const images = [1, 2, 3, 4, 5, 6, 7];
 
-function UserImageList() {
+function UserImageList(props) {
 
   return (
     <Box sx={{ 
@@ -21,13 +21,18 @@ function UserImageList() {
       }}>
         {images.map((image) => (
           <ImageListItem key={image}>
-            <Box component="img" src='https://i.pinimg.com/736x/99/4b/8b/994b8b381ce52f32a3c59b7e616e8d4c--timeline-photos-easter-bunny.jpg' alt='image' 
+            <Box 
+              onClick={props.onClick} 
+              component="img" 
+              src='https://i.pinimg.com/736x/99/4b/8b/994b8b381ce52f32a3c59b7e616e8d4c--timeline-photos-easter-bunny.jpg'
+              srcSet='https://i.pinimg.com/736x/99/4b/8b/994b8b381ce52f32a3c59b7e616e8d4c--timeline-photos-easter-bunny.jpg' 
+              alt='image' 
               sx={{ 
                 marginLeft : { xs: (image === 1 ? 5 : 0 ), md: 0 },
                 marginRight : { xs: (image === images.length ? 5 : 0 ), md: 0 },
-                height: '100%', 
-                width: 'auto', 
-                minWidth: '15em', 
+                width: '14em',
+                height: '14em',
+                objectFit: 'cover',
               }}
             />
           </ImageListItem>

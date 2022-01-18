@@ -67,7 +67,8 @@ const useStyles = makeStyles({
 
 const imageLoaded = true;
 
-function UserContent() {
+function UserContent(props) {
+
   const theme = useTheme();
   const classes = useStyles();
 
@@ -93,18 +94,23 @@ function UserContent() {
       >
         {/* image container */}
         {itemData.map((item) => (
-          <ImageListItem className={(!imageLoaded ? classes.media : '')} key={item.img} sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            width: '17em',
-            height: '17em',
-            border: '1px solid',
-            borderColor: theme.palette.LIGHT_GREY.main,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-          }}>
+          <ImageListItem 
+            className={(!imageLoaded ? classes.media : '')} 
+            key={item.img} 
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '17em',
+              height: '17em',
+              border: '1px solid',
+              borderColor: theme.palette.LIGHT_GREY.main,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }}
+          >
             {/* image  */}
             <Box
+              onClick={props.onClick}
               component="img"
               src={`https://images.assetsdelivery.com/compings_v2/julynx/julynx1408/julynx140800023.jpg`}
               srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2`}
