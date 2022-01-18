@@ -59,7 +59,7 @@ function MultipleFileUploadArea({ name }) {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '2em',
+            marginTop: { xs: '3em', md: '2em' },
           }}>
             <Button
               variant="contained"
