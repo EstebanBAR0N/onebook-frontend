@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from '@mui/styles';
 
-import '../assets/styles/fonts.css';
+import '../../assets/styles/fonts.css';
 
 const useStyles = makeStyles({
   button: {

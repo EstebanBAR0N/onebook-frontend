@@ -5,7 +5,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from '@mui/styles';
 
-import '../assets/styles/fonts.css';
+import '../../assets/styles/fonts.css';
 
 const itemData = [
   {

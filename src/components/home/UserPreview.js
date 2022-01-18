@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import UserImageList from './UserImageList';
-import ImageModal from './ImageModal';
+import ImageModal from '../ImageModal';
 
 function UserPreview(props) {
   const theme = useTheme();

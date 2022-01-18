@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useTheme } from "@material-ui/core/styles";
 
-import '../assets/styles/fonts.css';
+import '../../assets/styles/fonts.css';
     
 function UserHeader(props) {
   const theme = useTheme();

@@ -1,8 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { useTheme } from "@material-ui/core/styles";
+
 import Navbar from '../Navbar';
-import UsersList from '../UsersList';
+import UsersList from '../home/UsersList';
 import BackToTopButton from '../BackToTopButton';
 
 import '../../assets/styles/index.css';

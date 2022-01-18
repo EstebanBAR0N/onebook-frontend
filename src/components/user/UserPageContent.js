@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 
-import '../assets/styles/fonts.css';
+import '../../assets/styles/fonts.css';
 
 import UserHeader from './UserHeader';
 import UserButtons from './UserButtons';
 import UserContent from './UserContent';
-import ImageModal from './ImageModal';
+import ImageModal from '../ImageModal';
 
 
 function UserPageContent() {

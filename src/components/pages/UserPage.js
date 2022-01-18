@@ -5,7 +5,7 @@ import '../../assets/styles/index.css';
 
 import Navbar from '../Navbar';
 import BackToTopButton from '../BackToTopButton';
-import UserPageContent from '../UserPageContent';
+import UserPageContent from '../user/UserPageContent';
 
 
 function UserPage() {
