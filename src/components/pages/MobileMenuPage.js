@@ -9,7 +9,7 @@ function MobileMenuPage() {
   const theme = useTheme();
 
   // temp variables
-  let userConnected = false;
+  let userConnected = true;
   let userId = 1;
 
   return (
@@ -60,7 +60,7 @@ function MobileMenuPage() {
             justifyContent: 'start',  
             marginLeft: '3em',
             marginTop: '3em',
-            marginBottom: '0.5em',
+            marginBottom: '1em',
         }}>
           <Link to="" style={{ color: 'white', fontSize: '25px', textDecoration: "none" }}>
             Profil
@@ -70,6 +70,7 @@ function MobileMenuPage() {
           display: 'flex', 
           justifyContent: 'start', 
           marginLeft: '3em', 
+          marginBottom: '1.5em',
         }}>
           <Link to="/login" style={{
             display: (!userConnected ? 'flex' : 'none'),
@@ -79,14 +80,29 @@ function MobileMenuPage() {
           }}>
             Se connecter
           </Link>
-          <Link to="/" style={{ 
-            display: (userConnected ? 'flex' : 'none'),
-            color: 'white', 
-            fontSize: '25px', 
-            textDecoration: "none" 
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            justifyContent: 'start',  
           }}>
-            Déconnexion
-          </Link>
+            <Link to="/account/upload" style={{
+              display: (userConnected ? 'flex' : 'none'),
+              color: 'white', 
+              fontSize: '25px', 
+              textDecoration: "none",
+              marginBottom: '0.7em',
+            }}>
+              Ajouter du contenu
+            </Link>
+            <Link to="/" style={{ 
+              display: (userConnected ? 'flex' : 'none'),
+              color: 'white', 
+              fontSize: '25px', 
+              textDecoration: "none" 
+            }}>
+              Déconnexion
+            </Link>
+          </Box>
         </Grid>
 
         <Grid item sx={{

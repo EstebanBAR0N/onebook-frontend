@@ -39,6 +39,7 @@ function UploadPageContent() {
       width: '99vw',
       margin: '0 auto',
     }}>
+
       {/* upload area container */}
       <Box sx={{
         height: { xs: '50%', md: '60%' },
@@ -49,8 +50,10 @@ function UploadPageContent() {
         backgroundColor: theme.palette.LIGHT_GREY.main,
         marginBottom: '1em',
       }}>
+        {/* UploadArea */}
         <UploadArea />
       </Box>
+
       {/* main buttons container */}
       <Box sx={{
         display: 'flex',
@@ -64,6 +67,7 @@ function UploadPageContent() {
         <Box sx={{
           display: { xs: 'none', md: 'flex' },
         }}>
+          
           {/* desktop screen */}
           <Button
             className={classes.redButton}
