@@ -1,17 +1,16 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import Box from '@mui/material/Box';
+
+import Navbar from '../Navbar';
+import UploadPageContent from '../UploadPageContent';
 
 
 function UploadPage() {
   return (
-    <div className="user-main-container">
-      <h1>Upload Page</h1>
-      <nav>
-        <Link to="/">Home</Link>
-        <br/>
-        <Link to="/login">Login</Link>
-      </nav>
-    </div>
+    <Box>
+      <Navbar />
+      <UploadPageContent />
+    </Box>
   );
 }
 

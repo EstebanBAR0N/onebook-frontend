@@ -1,10 +1,10 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Navbar from '../Navbar';
-import BackToTopButton from '../BackToTopButton';
 
 import '../../assets/styles/index.css';
 
+import Navbar from '../Navbar';
+import BackToTopButton from '../BackToTopButton';
 import UserPageContent from '../UserPageContent';
 
 

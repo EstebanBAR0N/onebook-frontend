@@ -68,7 +68,6 @@ const useStyles = makeStyles({
 const imageLoaded = true;
 
 function UserContent(props) {
-
   const theme = useTheme();
   const classes = useStyles();
 
