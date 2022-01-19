@@ -8,11 +8,13 @@ const images = [1, 2, 3, 4, 5, 6, 7];
 function UserImageList(props) {
 
   return (
+    // horizontal user image list
     <Box sx={{ 
       display: 'flex',
       justifyContent: 'center',
       width: '91%',
     }}>
+      {/* image list container */}
       <ImageList gap={100} sx={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
@@ -21,6 +23,7 @@ function UserImageList(props) {
       }}>
         {images.map((image) => (
           <ImageListItem key={image}>
+            {/* image */}
             <Box 
               onClick={props.onClick} 
               component="img" 

@@ -8,6 +8,7 @@ function BasicDatePicker() {
   const [value, setValue] = React.useState(null);
 
   return (
+    // date picker for register form
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         label="Date de naissance"

@@ -24,9 +24,14 @@ function LoginPage() {
   };
 
   return (
+    // main container
     <Container component="main" maxWidth="xs" sx={{ height: '100vh' }}>
       <CssBaseline />
+      
+      {/* back to home button */}
       <HomeButton />
+
+      {/* content container */}
       <Box
         sx={{
           marginTop: 8,
@@ -35,12 +40,15 @@ function LoginPage() {
           alignItems: 'center',
         }}
       >
+        {/* lockout icon */}
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
+        {/* title */}
         <Typography component="h1" variant="h5">
           Connectez-vous
         </Typography>
+        {/* form container */}
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -65,6 +73,7 @@ function LoginPage() {
               />
             </Grid>
           </Grid>
+          {/* submit button */}
           <Button
             type="submit"
             fullWidth
@@ -73,6 +82,7 @@ function LoginPage() {
           >
             Se connecter
           </Button>
+          {/* go to register page button */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/register" variant="body2">

@@ -7,6 +7,7 @@ const BackToTopButton = () => {
 
   const [visible, setVisible] = useState(false);
 
+  // display the back to top button when scroll > 300
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
 
@@ -28,6 +29,7 @@ const BackToTopButton = () => {
   window.addEventListener('scroll', toggleVisible);
 
   return (
+    // icon container
     <Button sx={{
       position: 'fixed',
       bottom: '1em',
@@ -35,6 +37,7 @@ const BackToTopButton = () => {
       zIndex: 2,
       borderRadius: 5,
     }}>
+      {/* icon */}
       <ArrowUpwardIcon
         onClick={scrollToTop}
         style={{ display: visible ? 'inline' : 'none' }}

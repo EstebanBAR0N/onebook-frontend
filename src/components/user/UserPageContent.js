@@ -25,7 +25,7 @@ function UserPageContent() {
   const handleClose = () => setOpen(false);
 
   return (
-    // main container
+    // user page content
     <Box container sx={{
       display: 'flex',
       flexDirection: 'column',

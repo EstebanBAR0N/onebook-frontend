@@ -7,11 +7,13 @@ import ImageListItem from '@mui/material/ImageListItem';
 function ListOfFiles(props) {
 
   return (
+    // list of file main container
     <Box sx={{
       display: 'flex',
       justifyContent: 'center',
       width: '91%',
     }}>
+      {/* images container */}
       <ImageList gap={100} sx={{
         display: 'flex',
         justifyContent: 'start',
@@ -20,6 +22,7 @@ function ListOfFiles(props) {
       }}>
         {props.files.map((file, idx) => (
           <ImageListItem key={idx}>
+            {/* image */}
             <Box
               component="img"
               src='https://i.pinimg.com/736x/99/4b/8b/994b8b381ce52f32a3c59b7e616e8d4c--timeline-photos-easter-bunny.jpg'

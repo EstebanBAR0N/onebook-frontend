@@ -13,24 +13,27 @@ function MobileMenuPage() {
   let userId = 1;
 
   return (
-    <Box sx={{ 
-      width: '100vw', 
+    // main container
+    <Box sx={{
+      width: '100vw',
       height: '100vh',
       backgroundColor: theme.palette.primary.main,
       color: 'white',
-      fontFamily: 'Hammersmith One', 
+      fontFamily: 'Hammersmith One',
       overflow: 'hidden',
     }}>
-      <Grid container sx={{ 
-        display: 'grid', 
+      {/* page content structure */}
+      <Grid container sx={{
+        display: 'grid',
         gridTemplateRows: '1fr 1fr 1px 1fr 1fr 5fr',
         alignItems: 'center',
         height: '100%'
       }}>
-        <Grid item sx={{ 
-          display: 'flex', 
-          justifyContent: 'start',  
-          marginLeft: '3em', 
+        {/* main button */}
+        <Grid item sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          marginLeft: '3em',
           marginTop: '3em',
           marginBottom: '1.5em',
         }}>
@@ -38,79 +41,86 @@ function MobileMenuPage() {
             Accueil
           </Link>
         </Grid>
-        <Grid item sx={{ 
-          display: 'flex', 
-          justifyContent: 'start',  
-          marginLeft: '3em', 
+        {/* main button */}
+        <Grid item sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          marginLeft: '3em',
           marginBottom: '3em',
         }}>
-          <Link to={'/user/'+userId} style={{ color: 'white', fontSize: '35px', textDecoration: "none" }}>
+          <Link to={'/user/' + userId} style={{ color: 'white', fontSize: '35px', textDecoration: "none" }}>
             Mon book
           </Link>
         </Grid>
 
-        <Grid item sx={{ 
+        {/* dash */}
+        <Grid item sx={{
           width: '1.3em',
           marginLeft: '3em',
           borderBottom: '1px solid white',
         }}></Grid>
 
-        <Grid item sx={{ 
-            display: 'flex', 
-            justifyContent: 'start',  
-            marginLeft: '3em',
-            marginTop: '3em',
-            marginBottom: '1em',
+        {/* secondary button */}
+        <Grid item sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          marginLeft: '3em',
+          marginTop: '3em',
+          marginBottom: '1em',
         }}>
           <Link to="" style={{ color: 'white', fontSize: '25px', textDecoration: "none" }}>
             Profil
           </Link>
         </Grid>
-        <Grid item sx={{ 
-          display: 'flex', 
-          justifyContent: 'start', 
-          marginLeft: '3em', 
+        {/* secondary buttons */}
+        <Grid item sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          marginLeft: '3em',
           marginBottom: '1.5em',
         }}>
+          {/* if user not connected */}
           <Link to="/login" style={{
             display: (!userConnected ? 'flex' : 'none'),
-            color: 'white', 
-            fontSize: '25px', 
-            textDecoration: "none" 
+            color: 'white',
+            fontSize: '25px',
+            textDecoration: "none"
           }}>
             Se connecter
           </Link>
-          <Box sx={{ 
-            display: 'flex', 
+          {/* if user connected */}
+          <Box sx={{
+            display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'start',  
+            justifyContent: 'start',
           }}>
             <Link to="/account/upload" style={{
               display: (userConnected ? 'flex' : 'none'),
-              color: 'white', 
-              fontSize: '25px', 
+              color: 'white',
+              fontSize: '25px',
               textDecoration: "none",
               marginBottom: '0.7em',
             }}>
               Ajouter du contenu
             </Link>
-            <Link to="/" style={{ 
+            <Link to="/" style={{
               display: (userConnected ? 'flex' : 'none'),
-              color: 'white', 
-              fontSize: '25px', 
-              textDecoration: "none" 
+              color: 'white',
+              fontSize: '25px',
+              textDecoration: "none"
             }}>
               Déconnexion
             </Link>
           </Box>
         </Grid>
-
+        
+        {/* title */}
         <Grid item sx={{
-          color: 'white', 
+          color: 'white',
           fontSize: '50px',
-          position:'absolute',                
-          bottom:0,                         
-          left:0, 
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
           marginLeft: '1em',
           marginBottom: '1em',
         }}>

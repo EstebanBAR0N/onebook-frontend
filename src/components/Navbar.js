@@ -117,12 +117,16 @@ function Navbar() {
   let userConnected = true;
 
   return (
+    // nav bar main container
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ 
         color: theme.palette.DARK_GREY.main, 
         backgroundColor: 'white' 
       }}>
+        {/* structure container */}
         <Grid container sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr' }}>
+
+          {/* onebook button */}
           <Grid item sx={{ 
             display: 'flex', 
             justifyContent: 'start', 
@@ -131,6 +135,8 @@ function Navbar() {
           }}>
             <OneBookButton />
           </Grid>
+
+          {/* search bar */}
           <Grid item sx={{ 
             display: 'flex', 
             justifyContent: 'center', 
@@ -156,12 +162,15 @@ function Navbar() {
               />
             </Search>
           </Grid>
+
+          {/* icons */}
           <Grid item sx={{ 
             display: 'flex', 
             justifyContent: 'end', 
             alignItems: 'center', 
             marginRight: { xs: 1, sm: 2, md: 4 } 
           }}>
+            {/* if user is not connected */}
             <Box sx={{ display: { xs: 'none', md: (!userConnected ? 'flex' : 'none') } }}>
               <Link to="/login" style={{
                 color: theme.palette.TEXT.main, 
@@ -172,10 +181,13 @@ function Navbar() {
                 Se connecter
               </Link>
             </Box>
+            {/* if user is connected */}
             <Box sx={{ display: { xs: 'none', md: (userConnected ? 'flex' : 'none') } }}>
+              {/* go to upload page  */}
               <IconButton size="large" color="inherit" onClick={goToUploadPage}>
                 <AddCircleOutlineIcon sx={{ fontSize: '1.2em' }} />
               </IconButton>
+              {/* notification icon */}
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -185,6 +197,7 @@ function Navbar() {
                   <NotificationsIcon sx={{ fontSize: '1.2em' }} />
                 </Badge>
               </IconButton>
+              {/* account icon */}
               <IconButton
                 size="large"
                 edge="end"
@@ -197,6 +210,7 @@ function Navbar() {
                 <AccountCircle sx={{ fontSize: '1.2em' }} />
               </IconButton>
             </Box>
+            {/* mobile icons */}
             <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
               <IconButton
                 size="large"

@@ -27,18 +27,22 @@ const style = {
 
 function ImageModal(props) {
   return (
+    // main container
     <Modal
       open={props.show}
       onClose={props.handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
+      {/* modale content */}
       <Box sx={style}>
+        {/* close button */}
         <Box onClick={props.handleClose} sx={{ width: '100%', marginTop: 1 }}>
           <Button sx={{ borderRadius: '5px' }}>
             <CloseIcon />
           </Button>
         </Box>
+        {/* image container */}
         <Box sx={{ 
           display: 'flex',
           justifyContent: 'center',
@@ -48,6 +52,7 @@ function ImageModal(props) {
           margin: 3,
           marginTop: 0.5,
         }}>
+          {/* image */}
           <Box
             component="img"
             src={props.url}

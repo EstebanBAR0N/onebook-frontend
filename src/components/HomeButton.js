@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 function HomeButton() {
   return (
+    // icon and text container
     <Box>
       <Link href="/" variant="body2" style={{
         display: 'flex',
@@ -13,6 +14,7 @@ function HomeButton() {
         textDecoration: 'none',
         height: '3em',
       }}>
+        {/* icon and text */}
         <HomeIcon /><span style={{ marginTop: "4px" }}>Home</span>
       </Link>
     </Box>

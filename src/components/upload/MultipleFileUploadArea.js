@@ -1,38 +1,19 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTheme } from "@material-ui/core/styles";
-// import { makeStyles } from '@material-ui/core';
-// import { useField } from 'formik';
-// FileError, FileRejection,
+import { useTheme, } from "@material-ui/core/styles";
+import { useField } from 'formik';
 import { useDropzone } from 'react-dropzone';
-// import { SingleFileUploadWithProgress } from './SingleFileUploadWithProgress';
-// import { UploadError } from './UploadError';
 
 import ListOfFiles from './ListOfFiles';
 
 
-// let currentId = 0;
-
-// function getNewId() {
-//   // we could use a fancier solution instead of a sequential ID :)
-//   return ++currentId;
-// }
-
-// export interface UploadableFile {
-//   // id was added after the video being released to fix a bug
-//   // Video with the bug -> https://youtube-2021-feb-multiple-file-upload-formik-bmvantunes.vercel.app/bug-report-SMC-Alpha-thank-you.mov
-//   // Thank you for the bug report SMC Alpha - https://www.youtube.com/channel/UC9C4AlREWdLoKbiLNiZ7XEA
-//   id: number;
-//   file: File;
-//   errors: FileError[];
-//   url?: string;
-// }
 
 function MultipleFileUploadArea({ name }) {
   const theme = useTheme();
 
+  const [_, __, helpers] = useField(name);
   const [files, setFiles] = useState([]);
 
   const onDrop = useCallback((accFiles, rejFiles) => {
@@ -41,9 +22,14 @@ function MultipleFileUploadArea({ name }) {
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
 
+  useEffect(() => {
+    helpers.setValue(files);
+  }, [files]);
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
+    // upload zone container
     <React.Fragment>
       <Box container sx={{
         width: '100%',
@@ -93,6 +79,7 @@ function MultipleFileUploadArea({ name }) {
             <ListOfFiles files={files} />
           </Box>
 
+          {/* debug  */}
           {/* {JSON.stringify(files)} */}
         </div>
       </Box>

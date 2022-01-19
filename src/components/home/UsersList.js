@@ -9,7 +9,9 @@ const users = [1, 2, 3, 4, 5, 6, 7];
 function UsersList() {
 
   return (
+    // home page content
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflowX: 'hidden' }}>
+      {/* list of user previews */}
       <List sx={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
         {users.map((user) => (
           <ListItem key={user} sx={{ 
