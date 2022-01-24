@@ -12,16 +12,102 @@ import Container from '@mui/material/Container';
 
 import BasicDatePicker from '../BasicDatePicker';
 import HomeButton from '../HomeButton';
+import helpers from '../../utils/helpers';
+import { useNavigate } from 'react-router-dom';
+
 
 function RegisterPage() {
+  // init states
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const [birthDate, setBirthDate] = React.useState(null);
+  let fields = {};
+  
+  // handle birthDate
+  function handleBirthDateChange(evt) {
+    setBirthDate(evt);
+  }
+  
+  // retourne Vrai si les mots de passe sont identiques
+  function samePasswords(password, confirmPassword) {
+    return password === confirmPassword;
+  }
+  
+  // retourne vrai si les données ne sont pas conformes
+  function corruptedField() {
+    if (
+      !isNaN(fields['username']) || 
+      fields['username'].length < 3 ||
+      !helpers.isValidEmail(fields['email'])
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  // redirection sur la page login
+  function goToAuthenticationPage() {
+    navigate('/login');
+  };
+
+  // handle submit
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+    const dateObj = new Date(birthDate);
+    const month = dateObj.getUTCMonth() + 1; //months from 1-12
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+
+    const date = year + "-" + month + "-" + day;
+
+    // set Fields
+    fields = { 
+      'username' : data.get('username'), 
+      'email' : data.get('email'), 
+      'password' : data.get('password'), 
+      'birthDate' : (date || null), 
+    };
+
+    // vérification des informations
+    if (!helpers.allFieldsAreFilledIn(fields)) {
+      alert('Un ou plusieurs champ(s) requis sont vide(s) !');
+      return;
+    }
+
+    const confirmPassword = data.get('confirmPassword');
+    if (!samePasswords(fields['password'], confirmPassword)) {
+      alert('Les mots de passe sont différents !');
+      return;
+    }
+
+    if (corruptedField()) {
+      let msg = 'Le nom d\'utilisateur et/ou l\'adresse mail ne sont pas conformes !';
+      msg += '\n';
+      msg += 'Nom utilisateur : au moins 3 caractères.';
+      alert(msg);
+      return;
+    }
+      
+    // envoi de la requête au serveur
+    const result = await fetch('http://localhost:4000/api/register', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify(fields),
     });
+
+    // recupération de la réponse
+    const response = await result.json();
+    console.log(response.message);
+
+    // redirection sur la page d'authentification si user bien créé
+    if (response.message) {
+      goToAuthenticationPage();
+    }
   };
 
   return (
@@ -88,15 +174,15 @@ function RegisterPage() {
               <TextField
                 required
                 fullWidth
-                name="passwordConfirmation"
+                name="confirmPassword"
                 label="Confirmer le mot de passe"
-                type="passwordConfirmation"
-                id="passwordConfirmation"
+                type="password"
+                id="confirmPassword"
                 autoComplete="new-password"
               />
             </Grid>
             <Grid item xs={12}>
-              <BasicDatePicker />
+              <BasicDatePicker onBirthDateChange={handleBirthDateChange} birthDate={birthDate} />
             </Grid>
           </Grid>
           {/* submit button */}

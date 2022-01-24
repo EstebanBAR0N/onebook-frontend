@@ -18,31 +18,34 @@ import RegisterPage from './components/pages/RegisterPage';
 import UserPage from './components/pages/UserPage';
 import UploadPage from './components/pages/UploadPage';
 
-import './assets/styles/index.css';
+import { ProvideAuth } from './context/useAuth';
 
+import './assets/styles/index.css';
 
 const theme = createTheme(mainTheme);
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-  <StylesProvider injectFirst>
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="user" element={<UserPage />}>
-              <Route path=":id" element={<UserPage />} />
-            </Route>
-            <Route path="mobileMenu" element={<MobileMenu />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
-            <Route path="account/upload" element={<UploadPage />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </MuiThemeProvider>
-  </StylesProvider>,
+  <ProvideAuth>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="user" element={<UserPage />}>
+                <Route path=":id" element={<UserPage />} />
+              </Route>
+              <Route path="mobileMenu" element={<MobileMenu />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="account/upload" element={<UploadPage />} />
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StylesProvider>
+  </ProvideAuth>,
   rootElement
 );

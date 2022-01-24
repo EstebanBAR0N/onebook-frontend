@@ -9,13 +9,6 @@ import UserPageContent from '../user/UserPageContent';
 
 
 function UserPage() {
-
-  const userId = parseInt(window.location.pathname.split('/')[2]);
-  if (!userId || userId < 1 || userId > 5) {
-    window.location.href = "/ErrorPage";
-    return;
-  }
-
   return (
     <Box>
       <Navbar />

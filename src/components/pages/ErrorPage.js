@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -18,11 +19,12 @@ const useStyles = makeStyles({
 }})
 
 function ErrorPage() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const classes = useStyles();
 
   const goToHome = () => {
-    window.location.href = '/';
+    navigate('/');
   };
 
   return (

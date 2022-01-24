@@ -11,16 +11,73 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import HomeButton from '../HomeButton';
+import helpers from '../../utils/helpers';
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from 'react-router-dom';
 
-function LoginPage() {
+function LoginPage(props) {
+  // init states and variables
+  const auth = useAuth();
+  const navigate = useNavigate();
+  let fields = {};
+  
+  // retourne vrai si les données ne sont pas conformes
+  function corruptedField() {
+    if (
+      !helpers.isValidEmail(fields['email'])
+    ) {
+      return true;
+    }
+    return false;
+  }
 
-  const handleSubmit = (event) => {
+  // redirection sur la page d'accueil
+  function goToHomePage() {
+    navigate('/');
+  };
+
+  // handlle submit
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+    // set Fields
+    fields = { 
+      'email' : data.get('email'), 
+      'password' : data.get('password'),
+    };
+
+    // vérification des informations
+    if (!helpers.allFieldsAreFilledIn(fields)) {
+      alert('Un ou plusieurs champ(s) requis sont vide(s) !');
+      return;
+    }
+
+    if (corruptedField()) {
+      let msg = 'L\'adresse mail n\'est pas conformes !';
+      alert(msg);
+    }
+      
+    // envoi de la requête au serveur
+    const result = await fetch('http://localhost:4000/api/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify(fields),
     });
+
+    // recupération de la réponse
+    const userData = await result.json();
+
+    // redirection sur homePage si user bien créé
+    if (userData.userId) {
+      // mise à jour du local storage => maj du contexte user
+      auth.login(userData);
+
+      goToHomePage();
+    }
   };
 
   return (

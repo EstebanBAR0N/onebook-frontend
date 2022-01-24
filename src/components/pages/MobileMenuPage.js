@@ -2,13 +2,29 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from 'react-router-dom';
 
 
 function MobileMenuPage() {
+  const auth = useAuth();
+  const navigate = useNavigate();
   const theme = useTheme();
 
-  // temp variables
+  
+  const deconnexion = () => {
+    // déconnecter le user
+    auth.logout();
+    
+    console.log("logout :", auth.user);
+    
+    // redirection sur l'accueil
+    navigate('/');
+  };
+  
+  // tmp variables
   let userConnected = true;
   let userId = 1;
 
@@ -103,7 +119,7 @@ function MobileMenuPage() {
             }}>
               Ajouter du contenu
             </Link>
-            <Link to="/" style={{
+            <Link onClick={deconnexion} to="/" style={{
               display: (userConnected ? 'flex' : 'none'),
               color: 'white',
               fontSize: '25px',

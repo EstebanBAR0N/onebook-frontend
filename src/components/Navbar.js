@@ -17,6 +17,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import OneBookButton from './OneBookButton';
+import { useAuth } from "../context/useAuth";
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,7 +53,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function Navbar() {
+function Navbar(props) {
+  const auth = useAuth();
+  const navigate = useNavigate();
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -68,9 +72,14 @@ function Navbar() {
     setAnchorEl(null);
   };
 
-  const goToHome = () => {
+  const deconnexion = () => {
     // déconnecter le user
-    window.location.href = '/';
+    auth.logout();
+
+    console.log("logout :", auth.user);
+
+    // redirection sur l'accueil
+    navigate('/');
   };
 
   const goToProfil = () => {
@@ -78,16 +87,16 @@ function Navbar() {
   }
 
   const goToMobileMenu = () => {
-    window.location.href = '/MobileMenu';
+    navigate('/MobileMenu');
   };
 
   const goToMyBook = () => {
-    const userId = 1;
-    window.location.href = '/user/'+userId;
+    const userId = auth.user.id;
+    navigate('/user/'+userId);
   };
 
   const goToUploadPage = () => {
-    window.location.href = '/account/upload';
+    navigate('/account/upload');
   };
 
   const menuId = 'primary-search-account-menu';
@@ -109,7 +118,7 @@ function Navbar() {
     >
       <MenuItem onClick={goToProfil}>Profil</MenuItem>
       <MenuItem onClick={goToMyBook}>Mon book</MenuItem>
-      <MenuItem onClick={goToHome}>Déconnexion</MenuItem>
+      <MenuItem onClick={deconnexion}>Déconnexion</MenuItem>
     </Menu>
   );
 
