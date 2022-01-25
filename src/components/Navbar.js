@@ -76,8 +76,6 @@ function Navbar(props) {
     // déconnecter le user
     auth.logout();
 
-    console.log("logout :", auth.user);
-
     // redirection sur l'accueil
     navigate('/');
   };
@@ -180,18 +178,18 @@ function Navbar(props) {
             marginRight: { xs: 1, sm: 2, md: 4 } 
           }}>
             {/* if user is not connected */}
-            <Box sx={{ display: { xs: 'none', md: (!userConnected ? 'flex' : 'none') } }}>
+            <Box sx={{ display: { xs: 'none', md: (!auth.user.id ? 'flex' : 'none') } }}>
               <Link to="/login" style={{
-                color: theme.palette.TEXT.main, 
+                color: theme.palette.primary.main, 
                 fontFamily: 'Arsenal',
-                fontSize: '20px', 
+                fontSize: '21px', 
                 textDecoration: "none" 
               }}>
                 Se connecter
               </Link>
             </Box>
             {/* if user is connected */}
-            <Box sx={{ display: { xs: 'none', md: (userConnected ? 'flex' : 'none') } }}>
+            <Box sx={{ display: { xs: 'none', md: (auth.user.id ? 'flex' : 'none') } }}>
               {/* go to upload page  */}
               <IconButton size="large" color="inherit" onClick={goToUploadPage}>
                 <AddCircleOutlineIcon sx={{ fontSize: '1.2em' }} />

@@ -102,11 +102,14 @@ function RegisterPage() {
 
     // recupération de la réponse
     const response = await result.json();
-    console.log(response.message);
+    console.log(response);
 
     // redirection sur la page d'authentification si user bien créé
     if (response.message) {
       goToAuthenticationPage();
+    }
+    else {
+      alert(response.error);
     }
   };
 
