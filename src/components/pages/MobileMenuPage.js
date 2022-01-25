@@ -18,11 +18,16 @@ function MobileMenuPage() {
     // déconnecter le user
     auth.logout();
     
-    console.log("logout :", auth.user);
-    
     // redirection sur l'accueil
     navigate('/');
   };
+
+
+  const goToMyBook = () => {
+    if (auth.user.id) { 
+      navigate('/user/' + auth.user.id);
+    }
+  }
   
   // tmp variables
   let userConnected = true;
@@ -59,12 +64,12 @@ function MobileMenuPage() {
         </Grid>
         {/* main button */}
         <Grid item sx={{
-          display: 'flex',
+          display: (auth.user.id ? 'flex' : 'none'),
           justifyContent: 'start',
           marginLeft: '3em',
           marginBottom: '3em',
         }}>
-          <Link to={'/user/' + userId} style={{ color: 'white', fontSize: '35px', textDecoration: "none" }}>
+          <Link onClick={goToMyBook} to={'/user/' + auth.user.id} style={{ color: 'white', fontSize: '35px', textDecoration: "none" }}>
             Mon book
           </Link>
         </Grid>
@@ -78,7 +83,7 @@ function MobileMenuPage() {
 
         {/* secondary button */}
         <Grid item sx={{
-          display: 'flex',
+          display: (auth.user.id ? 'flex' : 'none'),
           justifyContent: 'start',
           marginLeft: '3em',
           marginTop: '3em',
@@ -97,10 +102,11 @@ function MobileMenuPage() {
         }}>
           {/* if user not connected */}
           <Link to="/login" style={{
-            display: (!userConnected ? 'flex' : 'none'),
+            display: (!auth.user.id ? 'flex' : 'none'),
             color: 'white',
             fontSize: '25px',
-            textDecoration: "none"
+            textDecoration: "none",
+            marginTop: "3em",
           }}>
             Se connecter
           </Link>
@@ -111,7 +117,7 @@ function MobileMenuPage() {
             justifyContent: 'start',
           }}>
             <Link to="/account/upload" style={{
-              display: (userConnected ? 'flex' : 'none'),
+              display: (auth.user.id ? 'flex' : 'none'),
               color: 'white',
               fontSize: '25px',
               textDecoration: "none",
@@ -120,7 +126,7 @@ function MobileMenuPage() {
               Ajouter du contenu
             </Link>
             <Link onClick={deconnexion} to="/" style={{
-              display: (userConnected ? 'flex' : 'none'),
+              display: (auth.user.id ? 'flex' : 'none'),
               color: 'white',
               fontSize: '25px',
               textDecoration: "none"

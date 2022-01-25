@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 
 import '../../assets/styles/fonts.css';
@@ -7,12 +7,34 @@ import UserHeader from './UserHeader';
 import UserButtons from './UserButtons';
 import UserContent from './UserContent';
 import ImageModal from '../ImageModal';
+import useFetch from "../../context/useFetch";
+import { useAuth } from "../../context/useAuth";
 
 
 function UserPageContent() {
+  // user context
+  const auth = useAuth();
+
+  // init variables
+  let offset = 0;
   const username = 'Neb_illust';
 
-  const [url, setUrl] = React.useState(null);
+  // handle fetch files
+  console.log("user id: ", auth.user.id )
+
+  const [format, setFormat] = useState('image');
+  const [url, setUrl] = React.useState(
+    "http://localhost:4000/api/file?userId=" +
+    1 +
+    "&format=" + format +
+    "&limit=12" +
+    "&offset=" + offset
+  );
+  const files = useFetch(url);
+
+  console.log("url : ", url, "files : ", files);
+
+  // handle modal
   const [open, setOpen] = React.useState(false);
 
   function handleImageClick(evt) {
@@ -35,7 +57,7 @@ function UserPageContent() {
     }}>
       <UserHeader username={username} />
       <UserButtons />
-      <UserContent onClick={handleImageClick} />
+      <UserContent onClick={handleImageClick} files={files} />
       <ImageModal handleClose={handleClose} url={url} show={open} />
     </Box>
   );

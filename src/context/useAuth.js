@@ -27,23 +27,16 @@ function useProvideAuth() {
   useEffect(() => {
     
     const userData = JSON.parse(localStorage.getItem('userData'));
-    
-    console.log('useEffect localstorage, userData : ', userData);
 
     // check si le token est tj valide
     const expirationDate = userData?.expirationDate;
     // const now = new Date(Date.now()).getTime();
     const now = Date.now();
 
-    console.log("timestamps : ", now, expirationDate);
-
-
     if (expirationDate && now < expirationDate) {
-      setLocalStorageState(userData);
-      console.log("set local storage");
+      setLocalStorageState(userData);      
     }
-    else {
-      console.log("exprirer")
+    else {      
       setLocalStorageState(null);
       localStorage.setItem('userData', JSON.stringify({}));
     }
@@ -57,8 +50,7 @@ function useProvideAuth() {
   // Because this sets state in the callback it will cause any ...
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
-  useEffect(() => {
-    console.log('useEffect user');
+  useEffect(() => {    
     if (!localStorageState?.userId) {
       setUser(false);
     }
@@ -70,14 +62,12 @@ function useProvideAuth() {
       
 
   // update localStorage
-  const login = (userData) => {
-    console.log('login', userData);
+  const login = (userData) => {    
     setLocalStorageState(userData);
     localStorage.setItem('userData', JSON.stringify(userData));
   };
 
-  const logout = () => {
-    console.log('logout');
+  const logout = () => {    
     setLocalStorageState(null);
     localStorage.setItem('userData', JSON.stringify({}));
   };

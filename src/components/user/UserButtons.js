@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import { alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
   button: {
     '&:hover': {
       border: 'none',
-      backgroundColor: 'none',
+      borderBottom: '1px solid #757575',
     },
   }
 })
@@ -20,8 +21,12 @@ const useStyles = makeStyles({
 function UserButtons() {
   const theme = useTheme();
   const classes = useStyles();
+  const [selectedButton, setSelectedButton] = useState(1);
 
-  let selectedButton = 1;
+  const selectButton = (evt) => {
+    setSelectedButton(evt.target.tabIndex);
+    // fetch les nouvelles data
+  }
 
   return (
     // main container
@@ -38,7 +43,7 @@ function UserButtons() {
         width: '90vw',
       }}>
         {/* buttons */}
-        <Button className={classes.button} sx={{
+        <Button onClick={selectButton} tabIndex={1} className={classes.button} sx={{
           width: '100%',
           color: alpha(theme.palette.TEXT.main, (selectedButton === 1 ? 1 : 0.5)),
           borderRadius: 0,
@@ -49,7 +54,7 @@ function UserButtons() {
           Images
         </Button>
         {/* buttons */}
-        <Button className={classes.button} sx={{
+        <Button onClick={selectButton} tabIndex={2} className={classes.button} sx={{
           width: '100%',
           color: alpha(theme.palette.TEXT.main, (selectedButton === 2 ? 1 : 0.5)),
           borderRadius: 0,
@@ -60,7 +65,7 @@ function UserButtons() {
           Vidéos
         </Button>
         {/* buttons */}
-        <Button className={classes.button} sx={{
+        <Button onClick={selectButton} tabIndex={3} className={classes.button} sx={{
           width: '100%',
           color: alpha(theme.palette.TEXT.main, (selectedButton === 3 ? 1 : 0.5)),
           borderRadius: 0,

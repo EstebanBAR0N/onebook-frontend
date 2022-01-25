@@ -53,7 +53,7 @@ function UserPreview(props) {
               color: theme.palette.TEXT.main
             }}
             >
-              Neb_illust
+              {props.username}
             </Link>
           </Typography>
         </Box>
