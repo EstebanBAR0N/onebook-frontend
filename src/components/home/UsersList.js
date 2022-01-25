@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -6,36 +6,46 @@ import UserPreview from './UserPreview';
 import useFetch from "../../context/useFetch";
 
 
+// check quand tu as le temps c'est le mieux : https://www.npmjs.com/package/react-infinite-scroll-component
+
 function UsersList() {
+  // init constantes
+  const limit = 3;
+
   // init states
+  const [url, setUrl] = React.useState(null);
   const [offset, setOffset] = useState(0);
-  const [url, setUrl] = React.useState(
-    "http://localhost:4000/api/user?limit=10&offset=" + offset
-  );
 
   // on offset changes => fetch
   useEffect(() => {
-    const newURL = "http://localhost:4000/api/user?limit=10" + "&offset=" + offset;
-
+    console.log(offset)
+    const newURL = 'http://localhost:4000/api/user?limit=' + limit + '&offset=' + offset;
     setUrl(newURL);
   }, [offset]);
 
-  const [users] = useFetch(url);
+  const { data: users } = useFetch(url);
 
-  console.log(users);
-
-  // infinity scroll
-  window.addEventListener("scroll", (event) => {
-    let scrollbarPosition = window.scrollY + window.innerHeight;
+  // handle infinity scrool
+  const handleScroll = useCallback((event) => {
+    let scrollbarPosition = window.scrollY + window.innerHeight + 10;
     let windowSize = document.documentElement.scrollHeight;
-            
+
     if (scrollbarPosition >= windowSize) {
-      console.log('offset : ', offset, 'users.lenght :', users.length);
-      if (users && (offset + 10 <= users.length)) {
-        setOffset(offset + 10);
-      }
+      setOffset((oldOffset) => {
+        if (oldOffset + limit <= users.length) {
+          return oldOffset + limit;
+        } else {
+          return oldOffset
+        }
+      });
     }
-  });
+  }, [users, offset]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => { window.removeEventListener('scroll', window); };
+  }, [handleScroll]);
 
   return (
     // home page content
@@ -43,7 +53,7 @@ function UsersList() {
       {/* list of user previews */}
       <List sx={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
         {users && users.map((user) => (
-          <ListItem key={user.id} sx={{ 
+          <ListItem key={user.id} sx={{
             marginTop: { xs: (user.id === 1 ? 2 : 10), md: (user.id === 1 ? 5 : 20) },
           }}>
             <UserPreview username={user.username} userId={user.id} />
