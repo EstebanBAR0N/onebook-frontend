@@ -69,7 +69,7 @@ function HomePage() {
     setOffset(0);
     setClearData(true);
     setUrl(newURL);
-    // window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
 

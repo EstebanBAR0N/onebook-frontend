@@ -21,7 +21,7 @@ const useFetch = (url, clearData) => {
       await setLoading(false);
     }
     catch {
-      console.log('Fetch error');
+      console.log('No fetch done');
     }
   }, [url]);
 

@@ -61,7 +61,7 @@ function UserPreview(props) {
       {/* image list container */}
       <Grid item xs={12}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
-          <UserImageList onClick={handleImageClick} />
+          <UserImageList onClick={handleImageClick} userId={props.userId} />
         </Box>
       </Grid>
       <ImageModal handleClose={handleClose} url={url} show={open} />

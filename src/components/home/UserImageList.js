@@ -1,41 +1,68 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import useFetch from "../../context/useFetch";
+import { useTheme } from "@material-ui/core/styles";
 
-const images = [1, 2, 3, 4, 5, 6, 7];
 
 function UserImageList(props) {
+  const theme = useTheme();
+
+  // fetch quelques les X premieres images du user pour avoir un apercu de ses travaux
+  const limit = 10;
+  const [url, setUrl] = useState(null);
+
+  console.log(url);
+
+  useEffect(() => {
+    const newURL = 'http://localhost:4000/api/file?limit='
+      + limit
+      + '&offset=0'
+      + '&userId='
+      + props.userId
+      + '&format=image';
+
+    setUrl(newURL);
+
+  }, [url]);
+
+
+  let { data: images } = useFetch(url, false);
+  console.log("images du user ", props.userId, " : ", images)
+
 
   return (
     // horizontal user image list
-    <Box sx={{ 
+    <Box sx={{
       display: 'flex',
       justifyContent: 'center',
       width: '91%',
     }}>
       {/* image list container */}
-      <ImageList gap={100} sx={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        width: '90vw', 
+      <ImageList gap={100} sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '90vw',
         height: '15em',
       }}>
-        {images.map((image) => (
-          <ImageListItem key={image}>
-            {/* image */}
-            <Box 
-              onClick={props.onClick} 
-              component="img" 
-              src='https://i.pinimg.com/736x/99/4b/8b/994b8b381ce52f32a3c59b7e616e8d4c--timeline-photos-easter-bunny.jpg'
-              srcSet='https://i.pinimg.com/736x/99/4b/8b/994b8b381ce52f32a3c59b7e616e8d4c--timeline-photos-easter-bunny.jpg' 
-              alt='image' 
-              sx={{ 
-                marginLeft : { xs: (image === 1 ? 5 : 0 ), md: 0 },
-                marginRight : { xs: (image === images.length ? 5 : 0 ), md: 0 },
+        {/* image */}
+        {images && images.map((image) => (
+          <ImageListItem key={image.id}>
+            <Box
+              onClick={props.onClick}
+              component="img"
+              src={image.url}
+              srcSet={image.url}
+              alt='image'
+              sx={{
+                marginLeft: { xs: (image.id === images[0].id ? 5.4 : 0), md: 0 },
+                marginRight: { xs: (image.id === images[images.length - 1].id ? 5.4 : 0), md: 0 },
                 width: '14em',
                 height: '14em',
                 objectFit: 'cover',
+                border: '1px solid',
+                borderColor: theme.palette.LIGHT_GREY.main,
               }}
             />
           </ImageListItem>
