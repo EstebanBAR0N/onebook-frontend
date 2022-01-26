@@ -39,6 +39,8 @@ function UploadButtons() {
       {/* secondary buttons container */}
       <Box sx={{
         display: { xs: 'none', md: 'flex' },
+        justifyContent: 'center',
+        alignItems: 'center',
       }}>
         
         {/* desktop screen */}

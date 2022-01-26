@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from "@material-ui/core/styles";
 
 import '../../assets/styles/fonts.css';
-    
+
 function UserHeader(props) {
   const theme = useTheme();
 
@@ -12,9 +12,10 @@ function UserHeader(props) {
     // main container
     <Box container sx={{
       display: 'flex',
-      justifyContent: 'center', 
+      justifyContent: 'center',
       alignItems: 'center',
       height: '18em',
+      marginTop: { xs: '3em', md: '5em' },
     }}>
       {/* secondary container */}
       <Box sx={{
@@ -22,14 +23,14 @@ function UserHeader(props) {
         flexDirection: 'column',
       }}>
         {/* image */}
-        <Box 
-          component="img" 
-          src='https://images.assetsdelivery.com/compings_v2/pikepicture/pikepicture1612/pikepicture161200526.jpg' 
-          alt='image' 
-          sx={{ 
-            height: { xs: '8em', md: '10em' }, 
-            width: 'auto', 
-            minWidth: { xs: '8em', md: '10em' }, 
+        <Box
+          component="img"
+          src='https://images.assetsdelivery.com/compings_v2/pikepicture/pikepicture1612/pikepicture161200526.jpg'
+          alt='image'
+          sx={{
+            height: { xs: '8em', md: '10em' },
+            width: 'auto',
+            minWidth: { xs: '8em', md: '10em' },
             borderRadius: '50%',
           }}
         />
@@ -43,11 +44,11 @@ function UserHeader(props) {
           {/* text */}
           <Typography style={{
             fontSize: '22px',
-            fontFamily: 'Arsenal', 
+            fontFamily: 'Arsenal',
             color: theme.palette.TEXT.main,
 
           }}>
-              {props.username}
+            {props.username}
           </Typography>
         </Box>
       </Box>
