@@ -1,27 +1,24 @@
-import { useState, useEffect, useCallback  } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-const useFetch = (url) => {
+const useFetch = (url, clearData) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // console.log('Dans le fetch')
 
   const fetchData = useCallback(async () => {
     try {
       await setLoading(true);
-  
-      // console.log('Loading ', loading);
-  
+
       const res = await fetch(url);
-      const newData = await res.json(); 
-  
-      console.log('newData : ', newData);
-  
-      await setData((prev) => [...prev, ...newData]);
-  
+      const newData = await res.json();
+
+      if (clearData) {
+        await setData(newData);
+      }
+      else {
+        await setData((prev) => [...prev, ...newData]);
+      }
+
       await setLoading(false);
-  
-      // console.log('Loading2 ', loading);
     }
     catch {
       console.log('Fetch error');
@@ -30,7 +27,6 @@ const useFetch = (url) => {
 
   useEffect(() => {
     fetchData();
-    // console.log("UNE QUERY SEXECUTE !");
   }, [url]);
 
   return { data };

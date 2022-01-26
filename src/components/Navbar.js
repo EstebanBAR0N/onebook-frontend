@@ -126,7 +126,7 @@ function Navbar(props) {
   return (
     // nav bar main container
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ 
+      <AppBar position="fixed" sx={{ 
         color: theme.palette.DARK_GREY.main, 
         backgroundColor: 'white' 
       }}>
@@ -166,6 +166,7 @@ function Navbar(props) {
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
                 sx={{ fontSize: { xs: '70%', sm: '85%', md: '100%' }, width: '100%' }}
+                onChange={props.onSearchChange}
               />
             </Search>
           </Grid>
@@ -223,7 +224,7 @@ function Navbar(props) {
                 size="large"
                 color="inherit"
                 onClick={goToMyBook}
-                sx={{ display: (userConnected ? 'flex' : 'none') }}
+                sx={{ display: (auth.user.id ? 'flex' : 'none') }}
               >
                 <AccountCircle />
               </IconButton>
