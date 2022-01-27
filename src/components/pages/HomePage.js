@@ -14,14 +14,14 @@ function HomePage() {
   const theme = useTheme();
 
   // init constantes
-  const limit = 5;
+  const limit = 10;
 
   // init states
   const [offset, setOffset] = useState(0);
   const [url, setUrl] = React.useState(null);
   const [clearData, setClearData] = useState(false);
 
-  let { data: users } = useFetch(url, clearData);
+  let { data: users, loading } = useFetch(url, clearData);
 
 
   // url update when offset has changed
@@ -31,6 +31,7 @@ function HomePage() {
       url.replace(regex, 'offset=' + offset)
       : 'http://localhost:4000/api/user?limit=' + limit + '&offset=' + offset
     setUrl(newURL);
+
   }, [offset]);
 
 
@@ -54,7 +55,7 @@ function HomePage() {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
-    return () => { window.removeEventListener('scroll', window); };
+    return () => { window.removeEventListener('scroll', handleScroll); };
   }, [handleScroll]);
   
 

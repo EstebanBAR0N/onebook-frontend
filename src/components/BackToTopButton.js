@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Button from '@mui/material/Button';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
@@ -8,7 +8,7 @@ const BackToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
   // display the back to top button when scroll > 300
-  const toggleVisible = () => {
+  const toggleVisible = useCallback(() => {
     const scrolled = document.documentElement.scrollTop;
 
     if (scrolled > 300) {
@@ -17,7 +17,7 @@ const BackToTopButton = () => {
     else if (scrolled <= 300) {
       setVisible(false);
     }
-  };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -26,7 +26,13 @@ const BackToTopButton = () => {
     });
   };
 
-  window.addEventListener('scroll', toggleVisible);
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisible);
+
+    return () => { 
+      window.removeEventListener('scroll', toggleVisible); 
+    };
+  }, [toggleVisible]);
 
   return (
     // icon container

@@ -120,9 +120,7 @@ function Navbar(props) {
     </Menu>
   );
 
-  // temp variables
-  let userConnected = true;
-
+  
   return (
     // nav bar main container
     <Box sx={{ flexGrow: 1 }}>
@@ -162,12 +160,14 @@ function Navbar(props) {
               <SearchIconWrapper>
                 <SearchIcon sx={{ fontSize: { xs: '1em', sm: '1.2em', md: '1.5em' } }} />
               </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                sx={{ fontSize: { xs: '70%', sm: '85%', md: '100%' }, width: '100%' }}
-                onChange={props.onSearchChange}
-              />
+              <form onSubmit={props.onSearchbarSubmit}>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  sx={{ fontSize: { xs: '70%', sm: '85%', md: '100%' }, width: '100%' }}
+                  onChange={props.onSearchChange}
+                />
+              </form>
             </Search>
           </Grid>
 

@@ -26,7 +26,7 @@ function useProvideAuth() {
   // update localStorageState for each render
   useEffect(() => {
     
-    const userData = JSON.parse(localStorage.getItem('userData'));
+    let userData = JSON.parse(localStorage.getItem('userData'));
 
     // check si le token est tj valide
     const expirationDate = userData?.expirationDate;

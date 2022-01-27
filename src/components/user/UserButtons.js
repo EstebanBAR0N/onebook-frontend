@@ -18,14 +18,14 @@ const useStyles = makeStyles({
   }
 })
 
-function UserButtons() {
+function UserButtons(props) {
   const theme = useTheme();
   const classes = useStyles();
   const [selectedButton, setSelectedButton] = useState(1);
 
   const selectButton = (evt) => {
     setSelectedButton(evt.target.tabIndex);
-    // fetch les nouvelles data
+    props.onClick(evt);
   }
 
   return (
@@ -43,36 +43,54 @@ function UserButtons() {
         width: '90vw',
       }}>
         {/* buttons */}
-        <Button onClick={selectButton} tabIndex={1} className={classes.button} sx={{
-          width: '100%',
-          color: alpha(theme.palette.TEXT.main, (selectedButton === 1 ? 1 : 0.5)),
-          borderRadius: 0,
-          border: 'none',
-          borderBottom: '1px solid',
-          borderColor: theme.palette.LIGHT_GREY.main,
-        }}>
+        <Button 
+          value='image' 
+          onClick={selectButton} 
+          tabIndex={1} 
+          className={classes.button} 
+          sx={{
+            width: '100%',
+            color: alpha(theme.palette.TEXT.main, (selectedButton === 1 ? 1 : 0.5)),
+            borderRadius: 0,
+            border: 'none',
+            borderBottom: '1px solid',
+            borderColor: theme.palette.LIGHT_GREY.main,
+          }}
+        >
           Images
         </Button>
         {/* buttons */}
-        <Button onClick={selectButton} tabIndex={2} className={classes.button} sx={{
-          width: '100%',
-          color: alpha(theme.palette.TEXT.main, (selectedButton === 2 ? 1 : 0.5)),
-          borderRadius: 0,
-          border: 'none',
-          borderBottom: '1px solid',
-          borderColor: theme.palette.LIGHT_GREY.main,
-        }}>
+        <Button 
+          value='video' 
+          onClick={selectButton}
+          tabIndex={2} 
+          className={classes.button} 
+          sx={{
+            width: '100%',
+            color: alpha(theme.palette.TEXT.main, (selectedButton === 2 ? 1 : 0.5)),
+            borderRadius: 0,
+            border: 'none',
+            borderBottom: '1px solid',
+            borderColor: theme.palette.LIGHT_GREY.main,
+          }}
+        >
           Vidéos
         </Button>
         {/* buttons */}
-        <Button onClick={selectButton} tabIndex={3} className={classes.button} sx={{
-          width: '100%',
-          color: alpha(theme.palette.TEXT.main, (selectedButton === 3 ? 1 : 0.5)),
-          borderRadius: 0,
-          border: 'none',
-          borderBottom: '1px solid',
-          borderColor: theme.palette.LIGHT_GREY.main,
-        }}>
+        <Button 
+          value='audio' 
+          onClick={selectButton}
+          tabIndex={3} 
+          className={classes.button} 
+          sx={{
+            width: '100%',
+            color: alpha(theme.palette.TEXT.main, (selectedButton === 3 ? 1 : 0.5)),
+            borderRadius: 0,
+            border: 'none',
+            borderBottom: '1px solid',
+            borderColor: theme.palette.LIGHT_GREY.main,
+          }}
+        >
           Audios
         </Button>
       </ButtonGroup>

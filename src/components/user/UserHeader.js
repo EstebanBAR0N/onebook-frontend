@@ -25,7 +25,7 @@ function UserHeader(props) {
         {/* image */}
         <Box
           component="img"
-          src='https://images.assetsdelivery.com/compings_v2/pikepicture/pikepicture1612/pikepicture161200526.jpg'
+          src={props.profilImage ? props.profilImage : 'https://images.assetsdelivery.com/compings_v2/pikepicture/pikepicture1612/pikepicture161200526.jpg'}
           alt='image'
           sx={{
             height: { xs: '8em', md: '10em' },

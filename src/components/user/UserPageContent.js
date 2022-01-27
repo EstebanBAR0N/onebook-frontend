@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 
 import '../../assets/styles/fonts.css';
@@ -8,37 +8,80 @@ import UserButtons from './UserButtons';
 import UserContent from './UserContent';
 import ImageModal from '../ImageModal';
 import useFetch from "../../context/useFetch";
-import { useAuth } from "../../context/useAuth";
 
 
 function UserPageContent() {
-  // user context
-  const auth = useAuth();
-
   // init variables
-  let offset = 0;
-  const username = 'Neb_illust';
+  const limit = 5;
+  const userId = window.location.pathname.split('/')[2];
+  const { data: user } = useFetch('http://localhost:4000/api/user/' + userId, true);
 
-  // handle fetch files
-  console.log("user id: ", auth.user.id )
-
+  // init states
+  const [url, setUrl] = React.useState(null);
   const [format, setFormat] = useState('image');
-  const [url, setUrl] = React.useState(
-    "http://localhost:4000/api/file?userId=" +
-    1 +
-    "&format=" + format +
-    "&limit=12" +
-    "&offset=" + offset
-  );
-  const files = useFetch(url);
+  const [offset, setOffset] = useState(0);
+  const [clearData, setClearData] = useState(false);
 
-  console.log("url : ", url, "files : ", files);
+  // fetch data
+  let { data: files, loading } = useFetch(url, clearData);
+
+  // handle url state
+  useEffect(() => {
+    const newURL = 'http://localhost:4000/api/file?userId='
+      + userId
+      + '&format='
+      + format
+      + '&limit='
+      + limit
+      + '&offset='
+      + offset;
+
+    setUrl(newURL);
+  }, [format, offset])
+
+
+  // handle offset state
+  const handleScroll = useCallback((event) => {
+    let scrollbarPosition = window.scrollY + window.innerHeight + 10;
+    let windowSize = document.documentElement.scrollHeight;
+
+    if (scrollbarPosition >= windowSize) {
+      setClearData(false);
+      setOffset((oldOffset) => {
+        if (!loading && oldOffset + limit <= files.length) {
+          return oldOffset + limit;
+        } else {
+          return oldOffset
+        }
+      });
+    }
+  }, [files, loading]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => { 
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
+
+
+  // handle format state
+  function changeFormat(evt) {
+    evt.preventDefault();
+
+    // clear data, offset to 0 and change format
+    setClearData(true);
+    setOffset(0);
+    setFormat(evt.target.value);
+  }
+
 
   // handle modal
   const [open, setOpen] = React.useState(false);
 
   function handleImageClick(evt) {
-    setUrl(evt.target.srcset);
+    setUrl(evt.target.src);
     if (window.innerWidth >= 650) {
       setOpen(true);
     }
@@ -55,8 +98,8 @@ function UserPageContent() {
       alignItems: 'center',
       height: '100%',
     }}>
-      <UserHeader username={username} />
-      <UserButtons />
+      <UserHeader username={user.username} profilImage={user.profilImage} />
+      <UserButtons onClick={changeFormat} />
       <UserContent onClick={handleImageClick} files={files} />
       <ImageModal handleClose={handleClose} url={url} show={open} />
     </Box>
