@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -13,10 +13,8 @@ function UserImageList(props) {
   const limit = 10;
   const [url, setUrl] = useState(null);
 
-  console.log(url);
-
   useEffect(() => {
-    const newURL = 'http://localhost:4000/api/file?limit='
+    let newURL = 'http://localhost:4000/api/file?limit='
       + limit
       + '&offset=0'
       + '&userId='
@@ -25,12 +23,12 @@ function UserImageList(props) {
 
     setUrl(newURL);
 
-  }, [url]);
+    return () => { newURL = null; };
+  }, []);
 
 
   let { data: images } = useFetch(url, false);
-  console.log("images du user ", props.userId, " : ", images)
-
+  
 
   return (
     // horizontal user image list
@@ -72,4 +70,4 @@ function UserImageList(props) {
   );
 }
 
-export default UserImageList;
+export default memo(UserImageList);
