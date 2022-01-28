@@ -13,20 +13,34 @@ import ListOfFiles from './ListOfFiles';
 function MultipleFileUploadArea({ name }) {
   const theme = useTheme();
 
+  // init states
   const [_, __, helpers] = useField(name);
   const [files, setFiles] = useState([]);
 
+  // handle on drop
   const onDrop = useCallback((accFiles, rejFiles) => {
-    const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
-    // const mappedRej = rejFiles.map((r) => ({ ...r, id: getNewId() }));
-    setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
+    if (rejFiles.length > 0) {
+      let msg = 'Erreur, les fichiers que vous essayez de télécharger ne sont pas conformes.\n';
+      msg += 'Taille maximum d\'un fichier : 3.5MB.\n';
+      msg += 'Formats acceptés : image, vidéo et audio.';
+      alert(msg);
+    }
+
+    const mappedAcc = accFiles.map((file) => (file));
+    setFiles((curr) => [...curr, ...mappedAcc]);
   }, []);
 
+  // faire remonter les 'files' au composant parent
   useEffect(() => {
     helpers.setValue(files);
   }, [files]);
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  // dropZone config
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: ['image/*', 'video/*', 'audio/*'],
+    maxSize: 3500 * 1024, // 3.5MB
+  });
 
   return (
     // upload zone container
@@ -37,7 +51,7 @@ function MultipleFileUploadArea({ name }) {
         margin: 1,
       }}>
         <div {...getRootProps()}>
-          <input {...getInputProps()} />
+          <input type='file' {...getInputProps()} />
 
           {/* drag and drop container */}
           <Box sx={{
@@ -78,9 +92,6 @@ function MultipleFileUploadArea({ name }) {
           }}>
             <ListOfFiles files={files} />
           </Box>
-
-          {/* debug  */}
-          {/* {JSON.stringify(files)} */}
         </div>
       </Box>
     </React.Fragment>

@@ -5,21 +5,10 @@ import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
-import { useTheme } from "@material-ui/core/styles";
-// import { makeStyles } from '@mui/styles';
 
 import '../../assets/styles/fonts.css';
 
-// const useStyles = makeStyles({
-//   media: {
-//     backgroundImage: `url('https://images.assetsdelivery.com/compings_v2/julynx/julynx1408/julynx140800023.jpg')`,
-//     backgroundSize: 'cover',
-//   },
-// })
-
 function UserContent(props) {
-  const theme = useTheme();
-  // const classes = useStyles();
 
   return (
     // main container
@@ -92,7 +81,7 @@ function UserContent(props) {
                 </Box>
                 <CardMedia
                   onClick={file.format === 'image' ? props.onClick : null}
-                  component={file.format === 'image' ? 'img' : file.format === 'video' ? 'video' : 'audio'} 
+                  component={file.format === 'image' ? 'img' : file.format} 
                   controls
                   image={file.url}
                   alt={file.format}

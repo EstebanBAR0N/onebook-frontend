@@ -18,7 +18,7 @@ function UploadPageContent() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: { xs: '4em' },
+      marginTop: { xs: '4em', sm: '10em', md: '10em' },
     }}>
       {/* content main container */}
       <Card sx={{
@@ -35,41 +35,47 @@ function UploadPageContent() {
             initialValues={{}}
             onSubmit={() => { }}
           >
-            {({ values, errors, isValid, isSubmitting }) => (
-              <Form>
-                {/* upload area container */}
-                <Box sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                  <Box
-                    sx={{
-                      width: { xs: '95%', md: '60%' },
-                      borderRadius: '45px',
-                      border: '2px dashed',
-                      borderColor: theme.palette.TEXT.main,
-                      backgroundColor: theme.palette.LIGHT_GREY.main,
-                      marginBottom: '1em',
-                    }}
-                  >
-                    <MultipleFileUploadArea name="files" />
+            {({ values, errors, isValid, isSubmitting }) => {
+              // console.log("values :", values)
+
+              return (
+                <Form>
+                  {/* upload area container */}
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                    <Box
+                      sx={{
+                        width: { xs: '95%', md: '60%' },
+                        borderRadius: '45px',
+                        border: '2px dashed',
+                        borderColor: theme.palette.TEXT.main,
+                        backgroundColor: theme.palette.LIGHT_GREY.main,
+                        marginBottom: '1em',
+                      }}
+                    >
+                      <MultipleFileUploadArea name="files" />
+                    </Box>
                   </Box>
-                </Box>
 
-                {/* buttons container */}
-                <Box container sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: '0 auto',
-                }}>
-                  <UploadButtons />
-                </Box>
+                  {/* buttons container */}
+                  <Box container sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '0 auto',
+                  }}>
+                    <UploadButtons />
+                  </Box>
 
-                {/* <pre>{JSON.stringify({ values, errors }, null, 4)}</pre> */}
-              </Form>
-            )}
+                  {/* debug */}
+                  {/* <pre>{JSON.stringify({ values, errors }, null, 4)}</pre> */}
+                </Form>
+              )
+            }
+            }
           </Formik>
         </CardContent>
       </Card>
