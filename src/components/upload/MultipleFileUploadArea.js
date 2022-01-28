@@ -80,19 +80,18 @@ function MultipleFileUploadArea({ name }) {
               ou glissez-déposez ici
             </Typography>
           </Box>
-
-          {/* list of files uploaded */}
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-            marginTop: '3em',
-          }}>
-            <ListOfFiles files={files} />
-          </Box>
         </div>
+        {/* list of files uploaded */}
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          marginTop: '3em',
+        }}>
+          <ListOfFiles files={files} />
+        </Box>
       </Box>
     </React.Fragment>
   );
