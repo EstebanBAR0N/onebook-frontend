@@ -12,7 +12,7 @@ import useFetch from "../../context/useFetch";
 
 function UserPageContent() {
   // init variables
-  const limit = 5;
+  const limit = 12;
   const userId = window.location.pathname.split('/')[2];
   const { data: user } = useFetch('http://localhost:4000/api/user/' + userId, true);
 

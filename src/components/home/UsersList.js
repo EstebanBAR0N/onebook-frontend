@@ -10,12 +10,17 @@ import UserPreview from './UserPreview';
 function UsersList(props) {
   return (
     // home page content
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflowX: 'hidden' }}>
+    <Box sx={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      overflowX: 'hidden',
+    }}>
       {/* list of user previews */}
-      <List sx={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        width:'100vw', 
+      <List sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100vw',
       }}>
         {props.users && props.users.map((user) => (
           <ListItem key={user.id} sx={{

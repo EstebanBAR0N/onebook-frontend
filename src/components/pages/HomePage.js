@@ -14,14 +14,15 @@ function HomePage() {
   const theme = useTheme();
 
   // init constantes
-  const limit = 10;
+  const limit = 12;
 
   // init states
   const [offset, setOffset] = useState(0);
   const [url, setUrl] = React.useState(null);
   const [clearData, setClearData] = useState(false);
+  const [sortByUsername, setSortByUsername] = useState(false);
 
-  let { data: users, loading } = useFetch(url, clearData);
+  let { data: users, loading } = useFetch(url, clearData, sortByUsername);
 
 
   // url update when offset has changed
@@ -42,6 +43,7 @@ function HomePage() {
 
     if (scrollbarPosition >= windowSize) {
       setClearData(false);
+      setSortByUsername(false);
       setOffset((oldOffset) => {
         if (oldOffset + limit <= users.length) {
           return oldOffset + limit;
@@ -69,6 +71,7 @@ function HomePage() {
 
     setOffset(0);
     setClearData(true);
+    setSortByUsername(true);
     setUrl(newURL);
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
