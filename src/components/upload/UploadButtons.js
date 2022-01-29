@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   }
 })
 
-function UploadButtons() {
+function UploadButtons(props) {
   const theme = useTheme();
   const classes = useStyles();
 
@@ -45,6 +45,7 @@ function UploadButtons() {
         
         {/* desktop screen */}
         <Button
+          onClick={props.onDeleteAll}
           className={classes.redButton}
           variant="contained"
           sx={{
@@ -80,6 +81,7 @@ function UploadButtons() {
         height: '100%',
       }}>
         <Button
+          onClick={props.onDeleteAll}
           className={classes.redButton}
           variant="contained"
           sx={{

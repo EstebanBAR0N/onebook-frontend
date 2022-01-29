@@ -10,12 +10,14 @@ import ListOfFiles from './ListOfFiles';
 
 
 
-function MultipleFileUploadArea({ name }) {
+function MultipleFileUploadArea(props) {
   const theme = useTheme();
 
+  
   // init states
-  const [_, __, helpers] = useField(name);
+  const [_, __, helpers] = useField(props.name);
   const [files, setFiles] = useState([]);
+
 
   // handle on drop
   const onDrop = useCallback((accFiles, rejFiles) => {
@@ -30,10 +32,22 @@ function MultipleFileUploadArea({ name }) {
     setFiles((curr) => [...curr, ...mappedAcc]);
   }, []);
 
+
+  // handle delete all files event
+  useEffect(() => {
+    if (props.deleteAll) {
+      setFiles([]);
+      props.clearDeleteAll();
+    }
+
+  }, [props.deleteAll]);
+
+
   // faire remonter les 'files' au composant parent
   useEffect(() => {
     helpers.setValue(files);
   }, [files]);
+
 
   // dropZone config
   const { getRootProps, getInputProps } = useDropzone({
@@ -41,6 +55,25 @@ function MultipleFileUploadArea({ name }) {
     accept: ['image/*', 'video/*', 'audio/*'],
     maxSize: 3500 * 1024, // 3.5MB
   });
+
+
+  // fonctions onDelete, onUpload
+  // Pour supprimer ou donner les urls cloudinary au composant parent
+  function onDelete(file) {
+    setFiles((curr) => curr.filter((f) => f !== file));
+  }
+
+  function onUpload(file, url) {
+    setFiles((curr) =>
+      curr.map((f) => {
+        if (f === file) {
+          return { f, url };
+        }
+        return f;
+      })
+    );
+  }
+
 
   return (
     // upload zone container
@@ -90,7 +123,7 @@ function MultipleFileUploadArea({ name }) {
           height: '100%',
           marginTop: '3em',
         }}>
-          <ListOfFiles files={files} />
+          <ListOfFiles onDelete={onDelete} onUpload={onUpload} files={files} />
         </Box>
       </Box>
     </React.Fragment>

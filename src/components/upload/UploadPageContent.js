@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,6 +11,17 @@ import UploadButtons from './UploadButtons';
 
 function UploadPageContent() {
   const theme = useTheme();
+
+  // handle delete all button
+  const [deleteAll, setDeleteAll] = useState(false);
+
+  const onDeleteAll = (evt) => {
+    setDeleteAll(true);
+  }
+
+  const clearDeleteAll = () => {
+    setDeleteAll(false);
+  }
 
   return (
     // inner page container
@@ -36,8 +47,6 @@ function UploadPageContent() {
             onSubmit={() => { }}
           >
             {({ values, errors, isValid, isSubmitting }) => {
-              // console.log("values :", values)
-
               return (
                 <Form>
                   {/* upload area container */}
@@ -56,7 +65,11 @@ function UploadPageContent() {
                         marginBottom: '1em',
                       }}
                     >
-                      <MultipleFileUploadArea name="files" />
+                      <MultipleFileUploadArea 
+                        name="files" 
+                        deleteAll={deleteAll} 
+                        clearDeleteAll={clearDeleteAll}
+                      />
                     </Box>
                   </Box>
 
@@ -67,7 +80,7 @@ function UploadPageContent() {
                     alignItems: 'center',
                     margin: '0 auto',
                   }}>
-                    <UploadButtons />
+                    <UploadButtons onDeleteAll={onDeleteAll} />
                   </Box>
 
                   {/* debug */}

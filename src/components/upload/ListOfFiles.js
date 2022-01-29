@@ -12,8 +12,8 @@ import { useTheme } from "@material-ui/styles";
 function ListOfFiles(props) {
   const theme = useTheme();
 
-  const deleteFile = () => {
-    console.log("delete");
+  const deleteFile = (file) => {
+    props.onDelete(file);
   }
 
   return (
@@ -41,14 +41,17 @@ function ListOfFiles(props) {
             <ImageListItem key={index.toString()+file.name}>
               {/* image */}
               <Card>
-                <DeleteIcon onClick={deleteFile} sx={{
-                  color: theme.palette.RED.main,
-                  position: 'absolute',
-                  right: {xs: -12, sm: -14, md: -15},
-                  top: {xs: -12, sm: -14, md: -15},
-                  width: {xs: '1.5em', sm: '1.8em', md: '2em'},
-                  height: {xs: '1.5em', sm: '1.8em', md: '2em'},
-                }}/>
+                <DeleteIcon 
+                  onClick={() => {deleteFile(file);}} 
+                  sx={{
+                    color: theme.palette.RED.main,
+                    position: 'absolute',
+                    right: {xs: -12, sm: -14, md: -15},
+                    top: {xs: -12, sm: -14, md: -15},
+                    width: {xs: '1.5em', sm: '1.8em', md: '2em'},
+                    height: {xs: '1.5em', sm: '1.8em', md: '2em'},
+                  }}
+                />
                 <Box sx={{
                   display: (file_type === 'audio' ? 'flex' : 'none'),
                   justifyContent: 'center',
