@@ -1,19 +1,19 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
 import { useTheme, } from "@material-ui/core/styles";
 import { useField } from 'formik';
 import { useDropzone } from 'react-dropzone';
 
-import ListOfFiles from './ListOfFiles';
-
+import SingleFileUpload from './SingleFileUpload';
 
 
 function MultipleFileUploadArea(props) {
   const theme = useTheme();
 
-  
   // init states
   const [_, __, helpers] = useField(props.name);
   const [files, setFiles] = useState([]);
@@ -84,7 +84,7 @@ function MultipleFileUploadArea(props) {
         margin: 1,
       }}>
         <div {...getRootProps()}>
-          <input type='file' {...getInputProps()} />
+          <input {...getInputProps()} />
 
           {/* drag and drop container */}
           <Box sx={{
@@ -123,7 +123,30 @@ function MultipleFileUploadArea(props) {
           height: '100%',
           marginTop: '3em',
         }}>
-          <ListOfFiles onDelete={onDelete} onUpload={onUpload} files={files} />
+          {/* list of files */}
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '91%',
+          }}>
+            {/* images container */}
+            <ImageList gap={100} sx={{
+              display: 'flex',
+              justifyContent: 'start',
+              alignItems: 'center',
+              width: '90vw',
+              height: { xs: '10em', sm: '15em', md: '17em' },
+            }}>
+              {files && files.map((file, index) => {
+                return (
+                  <ImageListItem key={index.toString()+file.name}>
+                    {/* file */}
+                    <SingleFileUpload file={file} onDelete={onDelete} /> 
+                  </ImageListItem>
+                )})
+              }
+            </ImageList>
+          </Box>
         </Box>
       </Box>
     </React.Fragment>
