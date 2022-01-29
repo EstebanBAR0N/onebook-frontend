@@ -59,6 +59,7 @@ function UploadButtons(props) {
           TOUT SUPPRIMER
         </Button>
         <Button
+          onClick={props.onUploadFiles}
           className={classes.greenButton}
           variant="contained"
           sx={{
@@ -99,6 +100,7 @@ function UploadButtons(props) {
           }} />
         </Button>
         <Button
+          onClick={props.onUploadFiles}
           className={classes.greenButton}
           variant="contained"
           sx={{

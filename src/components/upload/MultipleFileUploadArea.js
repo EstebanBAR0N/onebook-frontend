@@ -57,21 +57,9 @@ function MultipleFileUploadArea(props) {
   });
 
 
-  // fonctions onDelete, onUpload
-  // Pour supprimer ou donner les urls cloudinary au composant parent
+  // fonctions onDelete pour mettre à jour file
   function onDelete(file) {
     setFiles((curr) => curr.filter((f) => f !== file));
-  }
-
-  function onUpload(file, url) {
-    setFiles((curr) =>
-      curr.map((f) => {
-        if (f === file) {
-          return { f, url };
-        }
-        return f;
-      })
-    );
   }
 
 

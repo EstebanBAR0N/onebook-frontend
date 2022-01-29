@@ -4,24 +4,65 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useTheme } from "@material-ui/core/styles";
 import { Form, Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from "../../context/useAuth";
 import MultipleFileUploadArea from './MultipleFileUploadArea';
 import UploadButtons from './UploadButtons';
 
 
 function UploadPageContent() {
+  const auth = useAuth();
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  console.log('context : ', auth.user);
+
+  // upload files
+  const uploadFiles = async (values) => {
+    const files = values.files;
+
+    files.forEach(async (file) => {
+      const format = file.type.split('/')[0];
+      const userId = auth.user.id;
+
+      // prepare body query
+      let fields = new FormData();
+      fields.append('format', format);
+      fields.append('userId', userId.toString());
+      fields.append('file', file);
+
+      // envoi de la requête au serveur
+      const result = await fetch('http://localhost:4000/api/file', {
+        method: 'POST',
+        body: fields,
+      });
+
+      // recupération de la réponse
+      const response = await result.json();
+
+      // redirection sur la page d'authentification si user bien créé
+      if (response.message) {
+        window.location.reload();
+      }
+      else {
+        alert("Error", response.error);
+        return;
+      }
+    });
+  }; 
 
   // handle delete all button
   const [deleteAll, setDeleteAll] = useState(false);
 
   const onDeleteAll = (evt) => {
     setDeleteAll(true);
-  }
+  };
 
   const clearDeleteAll = () => {
     setDeleteAll(false);
-  }
+  };
+
 
   return (
     // inner page container
@@ -44,7 +85,6 @@ function UploadPageContent() {
         <CardContent>
           <Formik
             initialValues={{}}
-            onSubmit={() => { }}
           >
             {({ values, errors, isValid, isSubmitting }) => {
               return (
@@ -80,11 +120,11 @@ function UploadPageContent() {
                     alignItems: 'center',
                     margin: '0 auto',
                   }}>
-                    <UploadButtons onDeleteAll={onDeleteAll} />
+                    <UploadButtons 
+                      onDeleteAll={onDeleteAll} 
+                      onUploadFiles={() => uploadFiles(values)} 
+                    />
                   </Box>
-
-                  {/* debug */}
-                  {/* <pre>{JSON.stringify({ values, errors }, null, 4)}</pre> */}
                 </Form>
               )
             }
