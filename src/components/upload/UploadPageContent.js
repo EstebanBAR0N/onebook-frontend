@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from "@material-ui/core/styles";
 import { Form, Formik } from 'formik';
 
@@ -14,8 +16,13 @@ function UploadPageContent() {
   const auth = useAuth();
   const theme = useTheme();
 
+  // variable qui permet de savoir si on est en train d'upload
+  const [uploading, setUploading] = useState(false);
+
   // upload files
   const uploadFiles = async (values) => {
+    setUploading(true);
+
     const files = values.files;
 
     files.forEach(async (file) => {
@@ -40,12 +47,14 @@ function UploadPageContent() {
       // redirection sur la page d'authentification si user bien créé
       if (response.message) {
         window.location.reload();
+        setUploading(false);
       }
       else {
         alert("Error", response.error);
         return;
       }
     });
+
   }; 
 
   // handle delete all button
@@ -99,6 +108,7 @@ function UploadPageContent() {
                         borderColor: theme.palette.TEXT.main,
                         backgroundColor: theme.palette.LIGHT_GREY.main,
                         marginBottom: '1em',
+                        position: 'relative',
                       }}
                     >
                       <MultipleFileUploadArea 
@@ -106,9 +116,25 @@ function UploadPageContent() {
                         deleteAll={deleteAll} 
                         clearDeleteAll={clearDeleteAll}
                       />
+                      <Box 
+                        sx={{ 
+                          display: (uploading ? 'flex' : 'none'),
+                          position: 'absolute',
+                          margin: '0 auto',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: '100%',
+                          height: '100%',
+                          left: 0,
+                          top: 0,
+                          borderRadius: '45px',
+                          backgroundColor: alpha(theme.palette.DARK_GREY.main, 0.35),
+                        }}
+                      >
+                        <CircularProgress size='4em' />
+                      </Box>
                     </Box>
                   </Box>
-
                   {/* buttons container */}
                   <Box container sx={{
                     display: 'flex',
