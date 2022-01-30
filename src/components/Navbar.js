@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function Navbar(props) {
+function Navbar({ onSearchChange, displaySearchBar = false }) {
   const auth = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -131,14 +131,19 @@ function Navbar(props) {
         backgroundColor: 'white' 
       }}>
         {/* structure container */}
-        <Grid container sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr' }}>
-
+        <Grid 
+          container 
+          sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: (displaySearchBar ? '1fr 2fr 1fr' : '1fr 0 1fr'),
+          }}
+        >
           {/* onebook button */}
           <Grid item sx={{ 
             display: 'flex', 
             justifyContent: 'start', 
             alignItems: 'center', 
-            marginLeft: { xs: 1, sm: 2, md: 4 } 
+            marginLeft: { xs: 1, sm: 2, md: 4 },
           }}>
             <OneBookButton />
           </Grid>
@@ -148,26 +153,26 @@ function Navbar(props) {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
-            width: '100%' 
+            width: '100%', 
           }}>
             <Search sx={{
+              display: (displaySearchBar ? 'flex' : 'none'),
               backgroundColor: theme.palette.BG.main,
               borderRadius: 45,
               width: { xs: '85%', sm: '60%', md: '50%' },
               height: '60%',
-              display: 'flex',
               justifyContent: 'start',
               alignItems: 'center',
             }}>
               <SearchIconWrapper>
                 <SearchIcon sx={{ fontSize: { xs: '1em', sm: '1.2em', md: '1.5em' } }} />
               </SearchIconWrapper>
-              <form onSubmit={props.onSearchbarSubmit}>
+              <form>
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ 'aria-label': 'search' }}
                   sx={{ fontSize: { xs: '70%', sm: '85%', md: '100%' }, width: '100%' }}
-                  onChange={props.onSearchChange}
+                  onChange={onSearchChange}
                 />
               </form>
             </Search>
@@ -177,7 +182,7 @@ function Navbar(props) {
           <Grid item sx={{ 
             display: 'flex', 
             justifyContent: 'end', 
-            alignItems: 'center', 
+            alignItems: 'center',
             marginRight: { xs: 1, sm: 2, md: 4 } 
           }}>
             {/* if user is not connected */}

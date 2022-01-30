@@ -79,7 +79,7 @@ function HomePage() {
 
   return (
     <Box style={{ backgroundColor: theme.palette.BG.main }}>
-      <Navbar onSearchChange={onSearchChange} />
+      <Navbar onSearchChange={onSearchChange} displaySearchBar={true} />
       <UsersList users={users} />
       <BackToTopButton />
     </Box>

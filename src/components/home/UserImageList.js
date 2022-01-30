@@ -42,7 +42,7 @@ function UserImageList(props) {
         display: 'flex',
         justifyContent: 'space-between',
         width: '90vw',
-        height: '15em',
+        height: '16em',
       }}>
         {/* image */}
         {images && images.map((image) => (
