@@ -59,7 +59,6 @@ function Navbar(props) {
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -75,6 +74,9 @@ function Navbar(props) {
   const deconnexion = () => {
     // déconnecter le user
     auth.logout();
+    
+    //fermer le menu
+    setAnchorEl(null);
 
     // redirection sur l'accueil
     navigate('/');

@@ -36,6 +36,7 @@ function UserContent(props) {
           // get name of file by url
           const url = file.url.split('/');
           let file_name = url[url.length - 1].split('.').slice(0, -1).join(' ');
+          file_name = file_name.split('__')[1] || 'Fichier audio';
 
           return (
             <ImageListItem 

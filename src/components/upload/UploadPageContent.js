@@ -4,7 +4,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useTheme } from "@material-ui/core/styles";
 import { Form, Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from "../../context/useAuth";
 import MultipleFileUploadArea from './MultipleFileUploadArea';
@@ -14,9 +13,6 @@ import UploadButtons from './UploadButtons';
 function UploadPageContent() {
   const auth = useAuth();
   const theme = useTheme();
-  const navigate = useNavigate();
-
-  console.log('context : ', auth.user);
 
   // upload files
   const uploadFiles = async (values) => {
