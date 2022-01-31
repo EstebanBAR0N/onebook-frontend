@@ -9,11 +9,14 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import HomeButton from '../HomeButton';
 import helpers from '../../utils/helpers';
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from 'react-router-dom';
+
 
 function LoginPage(props) {
   // init states and variables
@@ -49,13 +52,30 @@ function LoginPage(props) {
 
     // vérification des informations
     if (!helpers.allFieldsAreFilledIn(fields)) {
-      alert('Un ou plusieurs champ(s) requis sont vide(s) !');
+      toast.error('Un ou plusieurs champ(s) requis sont vide(s) !', {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       return;
     }
 
     if (corruptedField()) {
-      let msg = 'L\'adresse mail n\'est pas conformes !';
-      alert(msg);
+      toast.error('L\'adresse mail n\'est pas conforme !', {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
 
     // envoi de la requête au serveur
@@ -157,6 +177,7 @@ function LoginPage(props) {
           </Grid>
         </Box>
       </Box>
+      <ToastContainer />
     </Container>
   );
 }

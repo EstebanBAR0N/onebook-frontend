@@ -7,12 +7,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from "@material-ui/core/styles";
 import { Form, Formik } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { useAuth } from "../../context/useAuth";
 import MultipleFileUploadArea from './MultipleFileUploadArea';
 import UploadButtons from './UploadButtons';
 
-import 'react-toastify/dist/ReactToastify.css';
 
 
 function UploadPageContent() {
@@ -51,7 +51,7 @@ function UploadPageContent() {
       if (response.message) {
         setDeleteAll(true);
         setUploading(false);
-        toast.success("Data successfully uploaded!", {
+        toast.success("Les données ont bien été téléchargées!", {
           position: "top-right",
           autoClose: 4000,
           hideProgressBar: false,

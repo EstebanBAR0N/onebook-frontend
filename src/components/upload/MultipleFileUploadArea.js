@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import { useTheme, } from "@material-ui/core/styles";
 import { useField } from 'formik';
 import { useDropzone } from 'react-dropzone';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import SingleFileUpload from './SingleFileUpload';
 
@@ -22,10 +24,36 @@ function MultipleFileUploadArea(props) {
   // handle on drop
   const onDrop = useCallback((accFiles, rejFiles) => {
     if (rejFiles.length > 0) {
-      let msg = 'Erreur, les fichiers que vous essayez de télécharger ne sont pas conformes.\n';
-      msg += 'Taille maximum d\'un fichier : 3.5MB.\n';
-      msg += 'Formats acceptés : image, vidéo et audio.';
-      alert(msg);
+      toast.error('Les fichiers que vous essayez de télécharger ne sont pas conformes', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+      toast.warning('Taille maximum d\'un fichier : 3.5MB', {
+        position: "top-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+      toast.warning('Formats acceptés : image, vidéo et audio', {
+        position: "top-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
 
     const mappedAcc = accFiles.map((file) => (file));
@@ -137,6 +165,7 @@ function MultipleFileUploadArea(props) {
           </Box>
         </Box>
       </Box>
+      <ToastContainer />
     </React.Fragment>
   );
 }

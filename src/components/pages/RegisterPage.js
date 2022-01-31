@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import BasicDatePicker from '../BasicDatePicker';
 import HomeButton from '../HomeButton';
@@ -72,26 +74,70 @@ function RegisterPage() {
 
     // vérification des informations
     if (!helpers.allFieldsAreFilledIn(fields)) {
-      alert('Un ou plusieurs champ(s) requis sont vide(s) !');
+      toast.error('Un ou plusieurs champ(s) requis sont vide(s) !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       return;
     }
 
     const confirmPassword = data.get('confirmPassword');
     if (!samePasswords(fields['password'], confirmPassword)) {
-      alert('Les mots de passe sont différents !');
+      toast.error('Mots de passe différents !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       return;
     }
 
     if (corruptedField()) {
-      let msg = 'Le nom d\'utilisateur et/ou l\'adresse mail ne sont pas conformes !';
-      msg += '\n';
-      msg += 'Nom utilisateur : au moins 3 caractères.';
-      alert(msg);
+      toast.error('Le nom d\'utilisateur et/ou l\'adresse mail ne sont pas conformes !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+      toast.error('Nom utilisateur : au moins 3 caractères.', {
+        position: "top-right",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+      toast.error('Adresse mail doit être de la forme : x@y.z', {
+        position: "top-right",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       return;
     }
       
     // envoi de la requête au serveur
-    const result = await fetch('http://localhost:4000/api/register', {
+    const result = await fetch('http://localhost:5000/api/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -108,7 +154,16 @@ function RegisterPage() {
       goToAuthenticationPage();
     }
     else {
-      alert("Error", response.error);
+      toast.error(response.error, {
+        position: "top-right",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
   };
 
@@ -214,6 +269,7 @@ function RegisterPage() {
           </Grid>
         </Box>
       </Box>
+      <ToastContainer />
     </Container>
   );
 }
