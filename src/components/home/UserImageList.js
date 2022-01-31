@@ -51,7 +51,7 @@ function UserImageList(props) {
         <Typography sx={{
           fontSize: {xs: '16px', md: '20px'},
         }}>
-          Aucune donnée trouvé.
+          Aucune donnée trouvée.
         </Typography>
       </Box>
       {/* image list container */}
