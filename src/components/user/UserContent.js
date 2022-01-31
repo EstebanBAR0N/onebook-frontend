@@ -20,6 +20,23 @@ function UserContent(props) {
       height: '100%',
       marginTop: '2em',
     }}>
+      {/* no data found */}
+      <Box sx={{
+        display: (props.files.length === 0 ? 'flex' : 'none'),
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        left: 'calc(50% - 10em)',
+        top: 'calc(50% + 5em)',
+        width: '20em',
+        height: '10em',
+      }}>
+        <Typography sx={{
+          fontSize: {xs: '16px', md: '20px'},
+        }}>
+          Aucune donnée trouvé.
+        </Typography>
+      </Box>
       {/* image list */}
       <ImageList sx={{
         display: 'flex',
