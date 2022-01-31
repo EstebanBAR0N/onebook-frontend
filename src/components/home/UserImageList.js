@@ -1,7 +1,10 @@
 import React, { useState, useEffect, memo } from 'react';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Typography from '@mui/material/Typography';
 import useFetch from "../../context/useFetch";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -18,8 +21,7 @@ function UserImageList(props) {
       + limit
       + '&offset=0'
       + '&userId='
-      + props.userId
-      + '&format=image';
+      + props.userId;
 
     setUrl(newURL);
 
@@ -27,8 +29,8 @@ function UserImageList(props) {
   }, []);
 
 
-  let { data: images } = useFetch(url, false);
-  
+  let { data: files } = useFetch(url, false);
+
 
   return (
     // horizontal user image list
@@ -44,27 +46,66 @@ function UserImageList(props) {
         width: '90vw',
         height: '16em',
       }}>
-        {/* image */}
-        {images && images.map((image) => (
-          <ImageListItem key={image.id}>
-            <Box
-              onClick={props.onClick}
-              component="img"
-              src={image.url}
-              srcSet={image.url}
-              alt='image'
-              sx={{
-                marginLeft: { xs: (image.id === images[0].id ? 5.4 : 0), md: 0 },
-                marginRight: { xs: (image.id === images[images.length - 1].id ? 5.4 : 0), md: 0 },
+        {/* files */}
+        {files && files.map((file) => {
+
+          const file_type = file?.format;
+          let file_name = file.url[file.url.length - 1].split('.').slice(0, -1).join(' ');
+          file_name = file_name.split('__')[1] || 'Fichier audio';
+
+          return (
+            <ImageListItem key={file.id}>
+              {/* media  */}
+              <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: (file.format === 'audio' ? '20px' : 0),
+                marginBottom: '10px',
                 width: '14em',
                 height: '14em',
+                marginLeft: { xs: (file.id === files[0].id ? 5.4 : 0), md: 0 },
+                marginRight: { xs: (file.id === files[files.length - 1].id ? 5.4 : 0), md: 0 },
                 objectFit: 'cover',
-                border: '1px solid',
-                borderColor: theme.palette.LIGHT_GREY.main,
-              }}
-            />
-          </ImageListItem>
-        ))}
+              }}>
+                {/* text for audio media */}
+                <Box sx={{
+                  display:(file.format === 'audio' ? 'flex' : 'none'),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}>
+                  <Typography
+                    style={{ wordWrap: "break-word" }}
+                    gutterBottom
+                    variant="h5"
+                    component="h5"
+                    sx={{ 
+                      marginTop: '1em', 
+                      width: '100%',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {file_name}
+                  </Typography>
+                </Box>
+                {/* file */}
+                <CardMedia
+                  onClick={file.format === 'image' ? props.onClick : null}
+                  component={file.format === 'image' ? 'img' : file.format} 
+                  controls
+                  image={file.url}
+                  alt={file.format}
+                  loading='lazy'
+                  sx={{
+                    width: '14em',
+                    height: (file.format === 'audio' ? '3em' : '14em'),
+                    objectFit: 'cover',
+                  }}
+                />
+              </Card>
+            </ImageListItem>
+          )}
+        )}
       </ImageList>
     </Box>
   );

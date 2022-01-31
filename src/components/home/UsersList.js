@@ -39,7 +39,6 @@ function UsersList(props) {
         width: '100vw',
       }}>
         {props.users && props.users.map((user) => {
-          console.log(props.users)
           return (
             <ListItem key={user.id} sx={{
               marginTop: { xs: (user.id === 1 ? 2 : 10), md: (user.id === 1 ? 5 : 20) },

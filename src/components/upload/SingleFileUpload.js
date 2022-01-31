@@ -33,10 +33,10 @@ function SingleFileUpload(props) {
         height: { xs: '9em', sm: '12em', md: '14em' },
       }}>
         <Typography
-          style={{ wordWrap: "break-word" }}
+          style={{ wordWrap: 'break-word' }}
           gutterBottom
-          variant="h4"
-          component="h4"
+          variant='h4'
+          component='h4'
           sx={{ 
             width: '100%',
             textAlign: 'center',
@@ -47,7 +47,7 @@ function SingleFileUpload(props) {
         </Typography>
       </Box>
       <CardMedia
-        component={file_type === 'image' ? "img" : file_type}
+        component={file_type === 'image' ? 'img' : file_type}
         image={URL.createObjectURL(props.file)}
         alt='file'
         sx={{
