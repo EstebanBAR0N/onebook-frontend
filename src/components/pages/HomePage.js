@@ -21,16 +21,17 @@ function HomePage() {
   const [url, setUrl] = React.useState(null);
   const [clearData, setClearData] = useState(false);
   const [sortByUsername, setSortByUsername] = useState(false);
+  const [searchBarQuery, setSearchBarQuery] = useState(false);
 
   let { data: users, loading } = useFetch(url, clearData, sortByUsername);
 
 
   // url update when offset has changed
   useEffect(() => {
-    const regex = /offset=\d+/
+    const regex = /offset=\d+/;
     const newURL = url ?
       url.replace(regex, 'offset=' + offset)
-      : 'http://localhost:4000/api/user?limit=' + limit + '&offset=' + offset
+      : 'http://localhost:4000/api/user?limit=' + limit + '&offset=' + offset;
     setUrl(newURL);
 
   }, [offset]);
@@ -72,6 +73,7 @@ function HomePage() {
     setOffset(0);
     setClearData(true);
     setSortByUsername(true);
+    setSearchBarQuery(true);
     setUrl(newURL);
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
@@ -80,7 +82,7 @@ function HomePage() {
   return (
     <Box style={{ backgroundColor: theme.palette.BG.main }}>
       <Navbar onSearchChange={onSearchChange} displaySearchBar={true} />
-      <UsersList users={users} />
+      <UsersList users={users} searchBarQuery={searchBarQuery} />
       <BackToTopButton />
     </Box>
   );
