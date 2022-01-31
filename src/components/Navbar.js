@@ -167,7 +167,7 @@ function Navbar({ onSearchChange, displaySearchBar = false }) {
               <SearchIconWrapper>
                 <SearchIcon sx={{ fontSize: { xs: '1em', sm: '1.2em', md: '1.5em' } }} />
               </SearchIconWrapper>
-              <form>
+              <form style={{ display: 'flex', width: '100%' }}>
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ 'aria-label': 'search' }}
