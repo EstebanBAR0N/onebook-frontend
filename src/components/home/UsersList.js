@@ -39,9 +39,16 @@ function UsersList(props) {
         width: '100vw',
       }}>
         {props.users && props.users.map((user) => {
+          const firstUser = props.users[0].id;
+          const lastUser = props.users[props.users.length - 1].id;
+
           return (
             <ListItem key={user.id} sx={{
-              marginTop: { xs: (user.id === 1 ? 2 : 10), md: (user.id === 1 ? 5 : 20) },
+              marginTop: { 
+                xs: (user.id === firstUser ? 8 : 10), 
+                md: (user.id === firstUser ? 12 : 20) 
+              },
+              marginBottom: (user.id === lastUser ? 4 : 0),
             }}>
               <UserPreview username={user.username} userId={user.id} />
             </ListItem>

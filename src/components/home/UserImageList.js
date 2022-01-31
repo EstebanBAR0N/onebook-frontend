@@ -6,12 +6,9 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
 import useFetch from "../../context/useFetch";
-import { useTheme } from "@material-ui/core/styles";
 
 
 function UserImageList(props) {
-  const theme = useTheme();
-
   // fetch quelques les X premieres images du user pour avoir un apercu de ses travaux
   const limit = 10;
   const [url, setUrl] = useState(null);
@@ -37,12 +34,31 @@ function UserImageList(props) {
     <Box sx={{
       display: 'flex',
       justifyContent: 'center',
+      alignItems: 'center',
       width: '91%',
     }}>
+      {/* no data found */}
+      <Box sx={{
+        display: (files.length === 0 ? 'flex' : 'none'),
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        left: 'calc(50% - 10em)',
+        top: 'calc(50% - 10em)',
+        width: '20em',
+        height: '20em',
+      }}>
+        <Typography sx={{
+          fontSize: {xs: '16px', md: '20px'},
+        }}>
+          Aucune donnée trouvé.
+        </Typography>
+      </Box>
       {/* image list container */}
       <ImageList gap={100} sx={{
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
         width: '90vw',
         height: '16em',
       }}>
