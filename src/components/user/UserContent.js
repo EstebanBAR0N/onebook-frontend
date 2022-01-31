@@ -38,7 +38,7 @@ function UserContent(props) {
         </Typography>
       </Box>
       {/* image list */}
-      <ImageList sx={{
+      <ImageList cols={4} sx={{
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
@@ -56,7 +56,7 @@ function UserContent(props) {
           file_name = file_name.split('__')[1] || 'Fichier audio';
 
           return (
-            <ImageListItem 
+            <ImageListItem
               key={file.id} 
               sx={{
                 display: 'flex',

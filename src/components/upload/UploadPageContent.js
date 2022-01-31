@@ -6,10 +6,13 @@ import CardContent from '@mui/material/CardContent';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from "@material-ui/core/styles";
 import { Form, Formik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { useAuth } from "../../context/useAuth";
 import MultipleFileUploadArea from './MultipleFileUploadArea';
 import UploadButtons from './UploadButtons';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function UploadPageContent() {
@@ -46,16 +49,33 @@ function UploadPageContent() {
 
       // redirection sur la page d'authentification si user bien créé
       if (response.message) {
-        window.location.reload();
+        setDeleteAll(true);
         setUploading(false);
+        toast.success("Data successfully uploaded!", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       }
       else {
-        alert("Error", response.error);
-        return;
+        toast.error(response.error, {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       }
     });
-
-  }; 
+  };
 
   // handle delete all button
   const [deleteAll, setDeleteAll] = useState(false);
@@ -68,6 +88,7 @@ function UploadPageContent() {
     setDeleteAll(false);
   };
 
+  // toast.dark("Hey 👋, see how easy!");
 
   return (
     // inner page container
@@ -149,11 +170,11 @@ function UploadPageContent() {
                   </Box>
                 </Form>
               )
-            }
-            }
+            }}
           </Formik>
         </CardContent>
       </Card>
+      <ToastContainer />
     </Box>
   );
 }
