@@ -20,7 +20,7 @@ function LoginPage(props) {
   const auth = useAuth();
   const navigate = useNavigate();
   let fields = {};
-  
+
   // retourne vrai si les données ne sont pas conformes
   function corruptedField() {
     if (
@@ -42,9 +42,9 @@ function LoginPage(props) {
     const data = new FormData(event.currentTarget);
 
     // set Fields
-    fields = { 
-      'email' : data.get('email'), 
-      'password' : data.get('password'),
+    fields = {
+      'email': data.get('email'),
+      'password': data.get('password'),
     };
 
     // vérification des informations
@@ -57,7 +57,7 @@ function LoginPage(props) {
       let msg = 'L\'adresse mail n\'est pas conformes !';
       alert(msg);
     }
-      
+
     // envoi de la requête au serveur
     const result = await fetch('http://localhost:4000/api/login', {
       method: 'POST',
@@ -82,19 +82,27 @@ function LoginPage(props) {
 
   return (
     // main container
-    <Container component="main" maxWidth="xs" sx={{ height: '100vh' }}>
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
       <CssBaseline />
-      
+
       {/* back to home button */}
       <HomeButton />
 
       {/* content container */}
       <Box
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          marginTop: 10,
         }}
       >
         {/* lockout icon */}

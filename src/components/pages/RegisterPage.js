@@ -114,7 +114,15 @@ function RegisterPage() {
 
   return (
     // main container
-    <Container component="main" maxWidth="xs" sx={{ height: '100vh' }}>
+    <Container 
+      component="main" 
+      maxWidth="xs" 
+      sx={{ 
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
       <CssBaseline />
 
       {/* back to home button */}
@@ -123,7 +131,7 @@ function RegisterPage() {
       {/* content container */}
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: { xs: 4.5, md: 10 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

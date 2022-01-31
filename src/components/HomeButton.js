@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 function HomeButton() {
   return (
     // icon and text container
-    <Box>
+    <Box sx={{ marginTop: { md: '1em' } }}>
       <Link href="/" variant="body2" style={{
         display: 'flex',
         alignItems: 'center',
