@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,18 +9,23 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import FormHelperText from '@mui/material/FormHelperText';
 import { toast } from 'react-toastify';
 
 import HomeButton from '../HomeButton';
 import helpers from '../../utils/helpers';
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from "@material-ui/styles";
 
 
 function LoginPage(props) {
-  // init states and variables
+  // init states
+  const [fieldsInError, setFieldsInError] = useState(false);
   const auth = useAuth();
   const navigate = useNavigate();
+  const theme = useTheme();
+
   let fields = {};
 
   // retourne vrai si les données ne sont pas conformes
@@ -51,30 +56,13 @@ function LoginPage(props) {
 
     // vérification des informations
     if (!helpers.allFieldsAreFilledIn(fields)) {
-      toast.error('Un ou plusieurs champ(s) requis sont vide(s) !', {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      setFieldsInError(true);
       return;
     }
 
     if (corruptedField()) {
-      toast.error('L\'adresse mail n\'est pas conforme !', {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      setFieldsInError(true);
+      return;
     }
 
     // envoi de la requête au serveur
@@ -143,6 +131,7 @@ function LoginPage(props) {
                 label="Adresse mail"
                 name="email"
                 autoComplete="email"
+                error={fieldsInError}
               />
             </Grid>
             <Grid item xs={12}>
@@ -154,9 +143,17 @@ function LoginPage(props) {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                error={fieldsInError}
               />
             </Grid>
           </Grid>
+          {/* form helper */}
+          <FormHelperText sx={{
+            display: (fieldsInError ? "flex" : "none"),
+            color: theme.palette.RED.main,
+          }}>
+            Adresse email ou mot de passe incorrect !
+          </FormHelperText>
           {/* submit button */}
           <Button
             type="submit"

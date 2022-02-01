@@ -15,6 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { toast } from 'react-toastify';
 
 import OneBookButton from './OneBookButton';
 import { useAuth } from "../context/useAuth";
@@ -84,7 +85,17 @@ function Navbar({ onSearchChange, displaySearchBar = false }) {
 
   const goToProfil = () => {
     // go to profil
-  }
+    toast.warning('Cette page est en cours de création', {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  };
 
   const goToMobileMenu = () => {
     navigate('/MobileMenu');
@@ -126,9 +137,9 @@ function Navbar({ onSearchChange, displaySearchBar = false }) {
   return (
     // nav bar main container
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ 
+      <AppBar position="fixed" sx={{
         color: theme.palette.DARK_GREY.main, 
-        backgroundColor: 'white' 
+        backgroundColor: 'white',
       }}>
         {/* structure container */}
         <Grid 
