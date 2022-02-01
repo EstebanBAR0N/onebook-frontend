@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function MobileMenuPage() {
@@ -26,7 +27,23 @@ function MobileMenuPage() {
     if (auth.user.id) { 
       navigate('/user/' + auth.user.id);
     }
-  }
+  };
+
+
+  const goToProfil = () => {
+    // go to profil
+    toast.warning('Cette page est en cours de création', {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  };
+
   
   return (
     // main container
@@ -84,7 +101,7 @@ function MobileMenuPage() {
           marginTop: '3em',
           marginBottom: '1em',
         }}>
-          <Link to="" style={{ color: 'white', fontSize: '25px', textDecoration: "none" }}>
+          <Link onClick={goToProfil} to="" style={{ color: 'white', fontSize: '25px', textDecoration: "none" }}>
             Profil
           </Link>
         </Grid>
