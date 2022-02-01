@@ -85,7 +85,7 @@ function RegisterPage() {
       'password' : data.get('password'), 
       'confirmPassword' : data.get('confirmPassword'), 
     };
-    
+
     // vérification des informations
     if (!helpers.allFieldsAreFilledIn(checkFields)) {
       setAllFieldFilled(false);
@@ -256,7 +256,7 @@ function RegisterPage() {
                 { 
                   !allFieldFilled ? 'Des champs requis sont vides !' :
                   !samePasswords ? 'Les mots de passe saisis ne sont pas identiques !' :
-                  'Adresse email ou nom d\'utilisateur déjà existants ou non conformes !'
+                  'Adresse email ou nom d\'utilisateur non conformes !'
                 }
               </FormHelperText>
             </Box>
