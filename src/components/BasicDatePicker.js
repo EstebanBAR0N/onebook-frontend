@@ -4,9 +4,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
-function BasicDatePicker(props) {
-  // const [value, setValue] = React.useState(null);
 
+function BasicDatePicker(props) {
   return (
     // date picker for register form
     <LocalizationProvider dateAdapter={AdapterDateFns}>

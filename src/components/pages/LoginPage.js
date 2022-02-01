@@ -9,8 +9,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import FormHelperText from '@mui/material/FormHelperText';
 import { toast } from 'react-toastify';
+import FormHelperText from '@mui/material/FormHelperText';
 
 import HomeButton from '../HomeButton';
 import helpers from '../../utils/helpers';
@@ -23,8 +23,8 @@ function LoginPage(props) {
   // init states
   const [fieldsInError, setFieldsInError] = useState(false);
   const auth = useAuth();
-  const navigate = useNavigate();
   const theme = useTheme();
+  const navigate = useNavigate();
 
   let fields = {};
 
@@ -84,6 +84,18 @@ function LoginPage(props) {
       auth.login(userData);
 
       goToHomePage();
+    }
+    else {
+      toast.error(userData.error || 'Server error', {
+        position: "top-right",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
   };
 

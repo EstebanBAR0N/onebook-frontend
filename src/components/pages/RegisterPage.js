@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,16 +10,24 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { toast } from 'react-toastify';
+import FormHelperText from '@mui/material/FormHelperText';
 
 import BasicDatePicker from '../BasicDatePicker';
 import HomeButton from '../HomeButton';
 import helpers from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from "@material-ui/styles";
 
 
 function RegisterPage() {
-  // init states
+  const theme = useTheme();
   const navigate = useNavigate();
+
+  // init states
+  const [fieldsInError, setFieldsInError] = useState(false);
+  const [allFieldFilled, setAllFieldFilled] = useState(true);
+  const [samePasswords, setSamePasswords] = useState(true);
+
 
   const [birthDate, setBirthDate] = React.useState(null);
   let fields = {};
@@ -30,7 +38,7 @@ function RegisterPage() {
   }
   
   // retourne Vrai si les mots de passe sont identiques
-  function samePasswords(password, confirmPassword) {
+  function areSamePasswords(password, confirmPassword) {
     return password === confirmPassword;
   }
   
@@ -71,72 +79,39 @@ function RegisterPage() {
       'birthDate' : (date || null), 
     };
 
+    const checkFields = { 
+      'username' : data.get('username'), 
+      'email' : data.get('email'), 
+      'password' : data.get('password'), 
+      'confirmPassword' : data.get('confirmPassword'), 
+    };
+    
     // vérification des informations
-    if (!helpers.allFieldsAreFilledIn(fields)) {
-      toast.error('Un ou plusieurs champ(s) requis sont vide(s) !', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+    if (!helpers.allFieldsAreFilledIn(checkFields)) {
+      setAllFieldFilled(false);
+      setFieldsInError(true);
       return;
     }
 
     const confirmPassword = data.get('confirmPassword');
-    if (!samePasswords(fields['password'], confirmPassword)) {
-      toast.error('Mots de passe différents !', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+    if (!areSamePasswords(fields['password'], confirmPassword)) {
+      setAllFieldFilled(true);
+      setSamePasswords(false);
+      setFieldsInError(true);
       return;
     }
 
     if (corruptedField()) {
-      toast.error('Le nom d\'utilisateur et/ou l\'adresse mail ne sont pas conformes !', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-      toast.error('Nom utilisateur : au moins 3 caractères.', {
-        position: "top-right",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-      toast.error('Adresse mail doit être de la forme : x@y.z', {
-        position: "top-right",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      setAllFieldFilled(true);
+      setSamePasswords(true);
+      setFieldsInError(true);
       return;
     }
+
+    setFieldsInError(false);
       
     // envoi de la requête au serveur
-    const result = await fetch('http://localhost:5000/api/register', {
+    const result = await fetch('http://localhost:4000/api/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -151,6 +126,16 @@ function RegisterPage() {
     // redirection sur la page d'authentification si user bien créé
     if (response.message) {
       goToAuthenticationPage();
+      toast.success('Votre compte a bien été créé', {
+        position: "top-right",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
     else {
       toast.error(response.error, {
@@ -185,7 +170,7 @@ function RegisterPage() {
       {/* content container */}
       <Box
         sx={{
-          marginTop: { xs: 4.5, md: 10 },
+          marginTop: { xs: 2, md: 10 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -211,6 +196,7 @@ function RegisterPage() {
                 id="username"
                 label="Nom d'utilisateur"
                 autoFocus
+                error={fieldsInError}
               />
             </Grid>
             <Grid item xs={12}>
@@ -221,6 +207,7 @@ function RegisterPage() {
                 label="Adresse mail"
                 name="email"
                 autoComplete="email"
+                error={fieldsInError}
               />
             </Grid>
             <Grid item xs={12}>
@@ -232,6 +219,7 @@ function RegisterPage() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                error={fieldsInError}
               />
             </Grid>
             <Grid item xs={12}>
@@ -243,12 +231,35 @@ function RegisterPage() {
                 type="password"
                 id="confirmPassword"
                 autoComplete="new-password"
+                error={fieldsInError}
               />
             </Grid>
             <Grid item xs={12}>
-              <BasicDatePicker onBirthDateChange={handleBirthDateChange} birthDate={birthDate} />
+              <BasicDatePicker 
+                onBirthDateChange={handleBirthDateChange} 
+                birthDate={birthDate}
+              />
             </Grid>
           </Grid>
+          {/* form helper */}
+          <Box 
+              sx={{ 
+                display: 'flex', 
+                justifyContent: "center", 
+                width: '100%',
+              }}
+            >
+              <FormHelperText sx={{
+                display: (fieldsInError ? "flex" : "none"),
+                color: theme.palette.RED.main,
+              }}>
+                { 
+                  !allFieldFilled ? 'Des champs requis sont vides !' :
+                  !samePasswords ? 'Les mots de passe saisis ne sont pas identiques !' :
+                  'Adresse email ou nom d\'utilisateur déjà existants ou non conformes !'
+                }
+              </FormHelperText>
+            </Box>
           {/* submit button */}
           <Button
             type="submit"
