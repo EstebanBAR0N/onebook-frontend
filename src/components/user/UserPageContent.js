@@ -12,7 +12,7 @@ import useFetch from "../../context/useFetch";
 
 function UserPageContent() {
   // init variables
-  const limit = 12;
+  const limit = 10;
   const userId = window.location.pathname.split('/')[2];
   const { data: user } = useFetch('http://localhost:4000/api/user/' + userId, true);
 
@@ -100,7 +100,7 @@ function UserPageContent() {
     }}>
       <UserHeader username={user.username} profilImage={user.profilImage} />
       <UserButtons onClick={changeFormat} />
-      <UserContent onClick={handleImageClick} files={files} />
+      <UserContent onClick={handleImageClick} files={files} loading={loading} />
       <ImageModal handleClose={handleClose} url={url} show={open} />
     </Box>
   );

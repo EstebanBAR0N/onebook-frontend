@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
-import { useTheme } from "@material-ui/core/styles";
 import CircularProgress from '@mui/material/CircularProgress';
+import { useTheme } from "@material-ui/core/styles";
 
 import Navbar from '../Navbar';
 import UsersList from '../home/UsersList';

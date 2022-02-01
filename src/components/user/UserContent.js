@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -22,7 +23,7 @@ function UserContent(props) {
     }}>
       {/* no data found */}
       <Box sx={{
-        display: (props.files.length === 0 ? 'flex' : 'none'),
+        display: (props.files.length === 0 && !props.loading ? 'flex' : 'none'),
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
@@ -114,6 +115,17 @@ function UserContent(props) {
             </ImageListItem>
           )
         })}
+        {/* loading icon */}
+        <Box 
+          sx={{ 
+            display: (props.loading ? 'flex' : 'none'),
+            justifyContent: 'center',
+            height: '4em',
+            margin: '7em',
+          }}
+        >
+          <CircularProgress size='4em' />
+        </Box>
       </ImageList>
     </Box>
   );
