@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import { useTheme } from "@material-ui/core/styles";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Navbar from '../Navbar';
 import UsersList from '../home/UsersList';
@@ -14,7 +15,7 @@ function HomePage() {
   const theme = useTheme();
 
   // init constantes
-  const limit = 12;
+  const limit = 10;
 
   // init states
   const [offset, setOffset] = useState(0);
@@ -39,7 +40,7 @@ function HomePage() {
 
   // offset update (handle infinity scrool)
   const handleScroll = useCallback((event) => {
-    let scrollbarPosition = window.scrollY + window.innerHeight + 10;
+    let scrollbarPosition = window.scrollY + window.innerHeight + 100;
     let windowSize = document.documentElement.scrollHeight;
 
     if (scrollbarPosition >= windowSize) {
@@ -84,6 +85,16 @@ function HomePage() {
       <Navbar onSearchChange={onSearchChange} displaySearchBar={true} />
       <UsersList users={users} searchBarQuery={searchBarQuery} />
       <BackToTopButton />
+      <Box 
+        sx={{ 
+          display: (loading ? 'flex' : 'none'),
+          justifyContent: 'center',
+          height: '4em',
+          margin: '7em',
+        }}
+      >
+        <CircularProgress size='4em' />
+      </Box>
     </Box>
   );
 }

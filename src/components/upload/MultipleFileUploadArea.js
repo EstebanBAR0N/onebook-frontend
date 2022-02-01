@@ -7,8 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useTheme, } from "@material-ui/core/styles";
 import { useField } from 'formik';
 import { useDropzone } from 'react-dropzone';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import SingleFileUpload from './SingleFileUpload';
 
@@ -165,7 +164,6 @@ function MultipleFileUploadArea(props) {
           </Box>
         </Box>
       </Box>
-      <ToastContainer />
     </React.Fragment>
   );
 }

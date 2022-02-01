@@ -6,8 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from "@material-ui/core/styles";
 import { Form, Formik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import { useAuth } from "../../context/useAuth";
 import MultipleFileUploadArea from './MultipleFileUploadArea';
@@ -174,7 +173,6 @@ function UploadPageContent() {
           </Formik>
         </CardContent>
       </Card>
-      <ToastContainer />
     </Box>
   );
 }

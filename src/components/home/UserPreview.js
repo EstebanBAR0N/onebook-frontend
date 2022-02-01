@@ -15,7 +15,7 @@ function UserPreview(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleImageClick(evt) {
-    setUrl(evt.target.srcset);
+    setUrl(evt.target.src);
     if (window.innerWidth >= 650) {
       setOpen(true);
     }

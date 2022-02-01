@@ -8,6 +8,8 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import mainTheme from './assets/themes/mainTheme';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // custom components
 import ErrorPage from './components/pages/ErrorPage';
@@ -46,6 +48,7 @@ ReactDOM.render(
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>
+    <ToastContainer />
   </ProvideAuth>,
   rootElement
 );

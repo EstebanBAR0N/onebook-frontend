@@ -9,8 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import BasicDatePicker from '../BasicDatePicker';
 import HomeButton from '../HomeButton';
@@ -269,7 +268,6 @@ function RegisterPage() {
           </Grid>
         </Box>
       </Box>
-      <ToastContainer />
     </Container>
   );
 }

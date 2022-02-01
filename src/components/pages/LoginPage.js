@@ -9,8 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import HomeButton from '../HomeButton';
 import helpers from '../../utils/helpers';
@@ -177,7 +176,6 @@ function LoginPage(props) {
           </Grid>
         </Box>
       </Box>
-      <ToastContainer />
     </Container>
   );
 }
