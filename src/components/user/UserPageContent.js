@@ -8,13 +8,14 @@ import UserButtons from './UserButtons';
 import UserContent from './UserContent';
 import ImageModal from '../ImageModal';
 import useFetch from "../../context/useFetch";
+import { API_URL } from '../../constants';
 
 
 function UserPageContent() {
   // init variables
   const limit = 10;
   const userId = window.location.pathname.split('/')[2];
-  const { data: user } = useFetch('http://localhost:4000/api/user/' + userId, true);
+  const { data: user } = useFetch(API_URL+'/api/user/' + userId, true);
 
   // init states
   const [url, setUrl] = React.useState(null);
@@ -27,7 +28,7 @@ function UserPageContent() {
 
   // handle url state
   useEffect(() => {
-    const newURL = 'http://localhost:4000/api/file?userId='
+    const newURL = API_URL+'/api/file?userId='
       + userId
       + '&format='
       + format

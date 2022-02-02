@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { useTheme } from '@material-ui/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import { toast } from 'react-toastify';
+import CssBaseline from '@mui/material/CssBaseline';
 import FormHelperText from '@mui/material/FormHelperText';
-
-import HomeButton from '../HomeButton';
-import helpers from '../../utils/helpers';
-import { useAuth } from "../../context/useAuth";
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from "@material-ui/styles";
+import { toast } from 'react-toastify';
+import { API_URL } from '../../constants';
+import { useAuth } from '../../context/useAuth';
+import helpers from '../../utils/helpers';
+import HomeButton from '../HomeButton';
 
 
 function LoginPage(props) {
@@ -66,7 +66,7 @@ function LoginPage(props) {
     }
 
     // envoi de la requête au serveur
-    const result = await fetch('http://localhost:4000/api/login', {
+    const result = await fetch(API_URL+'/api/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

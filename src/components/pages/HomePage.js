@@ -7,6 +7,7 @@ import Navbar from '../Navbar';
 import UsersList from '../home/UsersList';
 import BackToTopButton from '../BackToTopButton';
 import useFetch from "../../context/useFetch";
+import { API_URL } from '../../constants';
 
 import '../../assets/styles/index.css';
 
@@ -32,7 +33,7 @@ function HomePage() {
     const regex = /offset=\d+/;
     const newURL = url ?
       url.replace(regex, 'offset=' + offset)
-      : 'http://localhost:4000/api/user?limit=' + limit + '&offset=' + offset;
+      : API_URL+'/api/user?limit=' + limit + '&offset=' + offset;
     setUrl(newURL);
 
   }, [offset]);
@@ -65,7 +66,7 @@ function HomePage() {
 
   /* HANDLE NAVBAR CHANGES */
   const onSearchChange = (evt) => {
-    const newURL = 'http://localhost:4000/api/user?limit='
+    const newURL = API_URL+'/api/user?limit='
       + limit
       + '&offset=0'
       + '&username='

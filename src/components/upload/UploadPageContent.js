@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from "../../context/useAuth";
 import MultipleFileUploadArea from './MultipleFileUploadArea';
 import UploadButtons from './UploadButtons';
-
+import { API_URL } from '../../constants';
 
 
 function UploadPageContent() {
@@ -38,7 +38,7 @@ function UploadPageContent() {
       fields.append('file', file);
 
       // envoi de la requête au serveur
-      const result = await fetch('http://localhost:4000/api/file', {
+      const result = await fetch(API_URL+'/api/file', {
         method: 'POST',
         body: fields,
       });

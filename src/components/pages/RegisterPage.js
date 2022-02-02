@@ -17,6 +17,7 @@ import HomeButton from '../HomeButton';
 import helpers from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from "@material-ui/styles";
+import { API_URL } from '../../constants';
 
 
 function RegisterPage() {
@@ -111,7 +112,7 @@ function RegisterPage() {
     setFieldsInError(false);
       
     // envoi de la requête au serveur
-    const result = await fetch('http://localhost:4000/api/register', {
+    const result = await fetch(API_URL+'/api/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

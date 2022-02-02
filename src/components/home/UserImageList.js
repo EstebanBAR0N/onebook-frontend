@@ -6,6 +6,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
 import useFetch from "../../context/useFetch";
+import { API_URL } from '../../constants';
 
 
 function UserImageList(props) {
@@ -14,7 +15,7 @@ function UserImageList(props) {
   const [url, setUrl] = useState(null);
 
   useEffect(() => {
-    let newURL = 'http://localhost:4000/api/file?limit='
+    let newURL = API_URL+'/api/file?limit='
       + limit
       + '&offset=0'
       + '&userId='
