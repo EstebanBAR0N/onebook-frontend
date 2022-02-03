@@ -11,7 +11,7 @@ import useFetch from "../../context/useFetch";
 import { API_URL } from '../../constants';
 
 
-function UserPageContent() {
+function UserPageContent() {  
   // init variables
   const limit = 10;
   const userId = window.location.pathname.split('/')[2];
@@ -43,7 +43,7 @@ function UserPageContent() {
 
   // handle offset state
   const handleScroll = useCallback((event) => {
-    let scrollbarPosition = window.scrollY + window.innerHeight + 10;
+    let scrollbarPosition = window.scrollY + window.innerHeight + 100;
     let windowSize = document.documentElement.scrollHeight;
 
     if (scrollbarPosition >= windowSize) {

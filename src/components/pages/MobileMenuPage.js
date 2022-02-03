@@ -13,25 +13,25 @@ function MobileMenuPage() {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  
+
   const deconnexion = () => {
     // déconnecter le user
     auth.logout();
-    
+
     // redirection sur l'accueil
     navigate('/');
   };
 
 
   const goToMyBook = () => {
-    if (auth.user.id) { 
+    if (auth.user.id) {
       navigate('/user/' + auth.user.id);
     }
   };
 
 
   const goToProfil = () => {
-    // go to profil
+    // notif page en cours de création
     toast.warning('Cette page est en cours de création', {
       position: 'top-right',
       autoClose: 4000,
@@ -44,7 +44,7 @@ function MobileMenuPage() {
     });
   };
 
-  
+
   return (
     // main container
     <Box sx={{
@@ -147,7 +147,7 @@ function MobileMenuPage() {
             </Link>
           </Box>
         </Grid>
-        
+
         {/* title */}
         <Grid item sx={{
           color: 'white',

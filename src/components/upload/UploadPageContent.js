@@ -62,6 +62,8 @@ function UploadPageContent() {
         });
       }
       else {
+        setDeleteAll(true);
+        setUploading(false);
         toast.error(response.error, {
           position: "top-right",
           autoClose: 4000,
@@ -72,6 +74,7 @@ function UploadPageContent() {
           progress: undefined,
           theme: 'colored',
         });
+        return;
       }
     });
   };
@@ -87,7 +90,6 @@ function UploadPageContent() {
     setDeleteAll(false);
   };
 
-  // toast.dark("Hey 👋, see how easy!");
 
   return (
     // inner page container
