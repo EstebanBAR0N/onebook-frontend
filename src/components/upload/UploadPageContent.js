@@ -37,21 +37,35 @@ function UploadPageContent() {
       fields.append('userId', userId.toString());
       fields.append('file', file);
 
-      // envoi de la requête au serveur
-      const result = await fetch(API_URL+'/api/file', {
-        method: 'POST',
-        body: fields,
-      });
+      try {
+        // envoi de la requête au serveur
+        const result = await fetch(API_URL+'/api/file', {
+          method: 'POST',
+          body: fields,
+        });
+  
+        // recupération de la réponse
+        const response = await result.json();
 
-      // recupération de la réponse
-      const response = await result.json();
-
-      // redirection sur la page d'authentification si user bien créé
-      if (response.message) {
+        if (response.message) {
+          setDeleteAll(true);
+          setUploading(false);
+          toast.success('Les données ont bien été téléchargées!', {
+            position: 'top-right',
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          });
+        }
+      } catch (err) {
         setDeleteAll(true);
         setUploading(false);
-        toast.success("Les données ont bien été téléchargées!", {
-          position: "top-right",
+        toast.error('Le fichier n\'a pas pu être téléchargé', {
+          position: 'top-right',
           autoClose: 4000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -60,21 +74,6 @@ function UploadPageContent() {
           progress: undefined,
           theme: 'colored',
         });
-      }
-      else {
-        setDeleteAll(true);
-        setUploading(false);
-        toast.error(response.error, {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-        });
-        return;
       }
     });
   };
