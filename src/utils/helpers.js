@@ -1,5 +1,5 @@
 // retourne Vrai si email est une adresse email valide
-exports.isValidEmail = (email) => {
+export const isValidEmail = (email) => {
   if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
     return true;
   }
@@ -7,7 +7,7 @@ exports.isValidEmail = (email) => {
 };
 
 // retourne Vrai si tous les champs requis sont remplis
-exports.allFieldsAreFilledIn = (fields) => {
+export const allFieldsAreFilledIn = (fields) => {
   for (const [key, value] of Object.entries(fields)) {
     if (!value) {
       return false;
@@ -15,3 +15,5 @@ exports.allFieldsAreFilledIn = (fields) => {
   }
   return true;
 }
+
+export default { isValidEmail, allFieldsAreFilledIn };
