@@ -22,7 +22,7 @@ function compareByLastUpdate(a, b) {
 
 const useFetch = (url, clearData, sortByUsername = false) => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -62,6 +62,7 @@ const useFetch = (url, clearData, sortByUsername = false) => {
       await setLoading(false);
     }
     catch {
+      setLoading(false);
       console.log('No fetch done');
     }
   }, [url]);
