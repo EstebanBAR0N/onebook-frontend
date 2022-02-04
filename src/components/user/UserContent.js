@@ -6,10 +6,21 @@ import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 
 import '../../assets/styles/fonts.css';
 
+
+const useStyles = makeStyles({
+  imageStyle: {
+    '&:hover': {
+      cursor: 'pointer',
+  },
+}});
+
+
 function UserContent(props) {
+  const classes = useStyles();
 
   return (
     // main container
@@ -69,7 +80,7 @@ function UserContent(props) {
               }}
             >
               {/* media  */}
-              <Card sx={{
+              <Card className={file.format === 'image' ? classes.imageStyle : ''} sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 borderRadius: (file.format === 'audio' ? '30px' : 0),

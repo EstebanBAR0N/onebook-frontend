@@ -7,9 +7,20 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
 import useFetch from "../../context/useFetch";
 import { API_URL } from '../../constants';
+import { makeStyles } from '@mui/styles';
+
+
+const useStyles = makeStyles({
+  imageStyle: {
+    '&:hover': {
+      cursor: 'pointer',
+  },
+}});
 
 
 function UserImageList(props) {
+  const classes = useStyles();
+
   // fetch quelques les X premieres images du user pour avoir un apercu de ses travaux
   const limit = 10;
   const [url, setUrl] = useState(null);
@@ -73,17 +84,19 @@ function UserImageList(props) {
           return (
             <ImageListItem key={file.id}>
               {/* media  */}
-              <Card sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: (file.format === 'audio' ? '20px' : 0),
-                marginBottom: '10px',
-                width: '14em',
-                height: '14em',
-                marginLeft: { xs: (file.id === files[0].id ? 5.4 : 0), md: 0 },
-                marginRight: { xs: (file.id === files[files.length - 1].id ? 5.4 : 0), md: 0 },
-                objectFit: 'cover',
-              }}>
+              <Card className={file.format === 'image' ? classes.imageStyle : ''}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  borderRadius: (file.format === 'audio' ? '20px' : 0),
+                  marginBottom: '10px',
+                  width: '14em',
+                  height: '14em',
+                  marginLeft: { xs: (file.id === files[0].id ? 5.4 : 0), md: 0 },
+                  marginRight: { xs: (file.id === files[files.length - 1].id ? 5.4 : 0), md: 0 },
+                  objectFit: 'cover',
+                }}
+              >
                 {/* text for audio media */}
                 <Box sx={{
                   display:(file.format === 'audio' ? 'flex' : 'none'),
