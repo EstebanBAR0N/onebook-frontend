@@ -20,6 +20,7 @@ function UploadPageContent() {
 
   // variable qui permet de savoir si on est en train d'upload
   const [uploading, setUploading] = useState(false);
+  const [localStorageState, setLocalStorageState] = useState(null);
 
   // upload files
   const uploadFiles = async (values) => {
@@ -42,8 +43,15 @@ function UploadPageContent() {
 
       try {
         // envoi de la requête au serveur
+        const localStorageData = window.localStorage.getItem('userData');
+        const userData = JSON.parse(localStorageData);
+        const token = userData.token;
+
         const result = await fetch(API_URL+'/api/file', {
           method: 'POST',
+          headers: {
+            authorization: 'Bearer ' + token
+          },
           body: fields,
         });
   
