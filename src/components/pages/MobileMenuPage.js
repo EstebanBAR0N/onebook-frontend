@@ -4,15 +4,16 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import { useAuth } from "../../context/useAuth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 
 function MobileMenuPage(props) {
-  const auth = useAuth();
   const navigate = useNavigate();
+  const params = useLocation();
+  const auth = useAuth();
   const theme = useTheme();
 
 
@@ -72,7 +73,7 @@ function MobileMenuPage(props) {
         }}>
           <IconButton
               size="large"
-              onClick={() => { navigate(props.previousPage); }}
+              onClick={() => { navigate(params.state.previousPage); }}
               color="inherit"
             >
             <MenuIcon sx={{ marginLeft: '-0.5em' }} />

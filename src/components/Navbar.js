@@ -19,7 +19,7 @@ import { toast } from 'react-toastify';
 
 import OneBookButton from './OneBookButton';
 import { useAuth } from "../context/useAuth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Navbar({ onSearchChange, displaySearchBar = false }) {
   const auth = useAuth();
   const navigate = useNavigate();
+  const params = useLocation();
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -98,7 +99,8 @@ function Navbar({ onSearchChange, displaySearchBar = false }) {
   };
 
   const goToMobileMenu = () => {
-    navigate('/MobileMenu');
+    const previousPage = params.pathname;
+    navigate('/MobileMenu', { state: { previousPage: previousPage } });
   };
 
   const goToMyBook = () => {
