@@ -84,11 +84,11 @@ function UserImageList(props) {
           return (
             <ImageListItem key={file.id}>
               {/* media  */}
-              <Card className={file.format === 'image' ? classes.imageStyle : ''}
+              <Card className={file_type === 'image' ? classes.imageStyle : ''}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
-                  borderRadius: (file.format === 'audio' ? '20px' : 0),
+                  borderRadius: (file_type === 'audio' ? '20px' : 0),
                   marginBottom: '10px',
                   width: '14em',
                   height: '14em',
@@ -99,7 +99,7 @@ function UserImageList(props) {
               >
                 {/* text for audio media */}
                 <Box sx={{
-                  display:(file.format === 'audio' ? 'flex' : 'none'),
+                  display:(file_type === 'audio' ? 'flex' : 'none'),
                   justifyContent: 'center',
                   alignItems: 'center',
                   height: '100%',
@@ -120,15 +120,15 @@ function UserImageList(props) {
                 </Box>
                 {/* file */}
                 <CardMedia
-                  onClick={file.format === 'image' ? props.onClick : null}
-                  component={file.format === 'image' ? 'img' : file.format} 
+                  onClick={file_type === 'image' ? props.onClick : null}
+                  component={file_type === 'image' ? 'img' : file_type} 
                   controls
                   image={file.url}
-                  alt={file.format}
+                  alt={file_type}
                   loading='lazy'
                   sx={{
                     width: '14em',
-                    height: (file.format === 'audio' ? '3em' : '14em'),
+                    height: (file_type === 'audio' ? '3em' : '14em'),
                     objectFit: 'cover',
                   }}
                 />

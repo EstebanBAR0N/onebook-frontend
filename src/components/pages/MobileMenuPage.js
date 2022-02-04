@@ -6,9 +6,11 @@ import { useTheme } from '@mui/material/styles';
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
-function MobileMenuPage() {
+function MobileMenuPage(props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -58,10 +60,24 @@ function MobileMenuPage() {
       {/* page content structure */}
       <Grid container sx={{
         display: 'grid',
-        gridTemplateRows: '1fr 1fr 1px 1fr 1fr 5fr',
+        gridTemplateRows: '1em 1fr 1fr 1px 1fr 1fr 5fr',
         alignItems: 'center',
         height: '100%'
       }}>
+        <Grid item sx={{
+          display: 'flex',
+          justifyContent: 'end',
+          marginRight: '0.5em',
+          marginTop: '2em',
+        }}>
+          <IconButton
+              size="large"
+              onClick={() => { navigate(props.previousPage); }}
+              color="inherit"
+            >
+            <MenuIcon sx={{ marginLeft: '-0.5em' }} />
+          </IconButton>
+        </Grid>
         {/* main button */}
         <Grid item sx={{
           display: 'flex',

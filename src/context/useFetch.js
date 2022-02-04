@@ -21,10 +21,14 @@ function compareByLastUpdate(a, b) {
 }
 
 const useFetch = (url, clearData, sortByUsername = false) => {
+  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  
   const fetchData = useCallback(async () => {
+    // if url is null, return
+    if (!url) return { data, loading };
+
     try {
       await setLoading(true);
 

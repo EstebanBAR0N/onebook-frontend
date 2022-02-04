@@ -20,10 +20,13 @@ function UploadPageContent() {
 
   // variable qui permet de savoir si on est en train d'upload
   const [uploading, setUploading] = useState(false);
-  const [localStorageState, setLocalStorageState] = useState(null);
 
   // upload files
   const uploadFiles = async (values) => {
+    if (values.files.length === 0) {
+      return;
+    }
+
     setUploading(true);
 
     const files = values.files;

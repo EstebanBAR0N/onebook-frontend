@@ -209,12 +209,13 @@ function Navbar({ onSearchChange, displaySearchBar = false }) {
             </Box>
             {/* if user is connected */}
             <Box sx={{ display: { xs: 'none', md: (auth.user.id ? 'flex' : 'none') } }}>
-              {/* go to upload page  */}
+              {/* upload icon  */}
               <IconButton size="large" color="inherit" onClick={goToUploadPage}>
                 <AddCircleOutlineIcon sx={{ fontSize: '1.2em' }} />
               </IconButton>
-              {/* notification icon */}
+              {/* bell icon */}
               <IconButton
+                sx={{ display : 'none' }}
                 size="large"
                 aria-label="show 17 new notifications"
                 color="inherit"
