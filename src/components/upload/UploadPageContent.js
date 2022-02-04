@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -26,6 +26,10 @@ function UploadPageContent() {
     setUploading(true);
 
     const files = values.files;
+    console.log(files, files.length)
+    let nbFileToUpload = files.length;
+    let inSuccess = 0;
+    let inError = 0;
 
     files.forEach(async (file) => {
       const format = file.type.split('/')[0];
@@ -48,8 +52,36 @@ function UploadPageContent() {
         const response = await result.json();
 
         if (response.message) {
+          inSuccess += 1;
           setDeleteAll(true);
           setUploading(false);
+        }
+      } catch (err) {
+        inError += 1;
+        setDeleteAll(true);
+        setUploading(false);
+      }
+      if (nbFileToUpload && (inError + inSuccess) === nbFileToUpload) {
+        if (inError > 0) {
+          let msg = '';
+          if (inError === nbFileToUpload) {
+            msg = "Les fichiers n'ont pas pu être téléchargés";
+          }
+          else {
+            msg = (nbFileToUpload - inSuccess).toString() + " files in error";
+          }
+          toast.error(msg, {
+            position: 'top-right',
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          });
+        }
+        else if (inSuccess === nbFileToUpload) {
           toast.success('Les données ont bien été téléchargées!', {
             position: 'top-right',
             autoClose: 4000,
@@ -61,22 +93,11 @@ function UploadPageContent() {
             theme: 'colored',
           });
         }
-      } catch (err) {
-        setDeleteAll(true);
-        setUploading(false);
-        toast.error('Le fichier n\'a pas pu être téléchargé', {
-          position: 'top-right',
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-        });
       }
     });
+
   };
+
 
   // handle delete all button
   const [deleteAll, setDeleteAll] = useState(false);
