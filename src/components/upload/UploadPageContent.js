@@ -26,7 +26,6 @@ function UploadPageContent() {
     setUploading(true);
 
     const files = values.files;
-    console.log(files, files.length)
     let nbFileToUpload = files.length;
     let inSuccess = 0;
     let inError = 0;
