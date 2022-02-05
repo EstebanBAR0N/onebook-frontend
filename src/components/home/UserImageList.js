@@ -69,7 +69,7 @@ function UserImageList(props) {
       {/* image list container */}
       <ImageList gap={100} sx={{
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         alignItems: 'center',
         width: '90vw',
         height: '16em',
