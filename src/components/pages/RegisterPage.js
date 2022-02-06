@@ -72,16 +72,18 @@ function RegisterPage() {
 
     const date = year + "-" + month + "-" + day;
 
+    let username = data.get('username').substring(0, 20);
+
     // set Fields
     fields = { 
-      'username' : data.get('username'), 
+      'username' : username, 
       'email' : data.get('email'), 
       'password' : data.get('password'), 
       'birthDate' : (date || null), 
     };
 
     const checkFields = { 
-      'username' : data.get('username'), 
+      'username' : username, 
       'email' : data.get('email'), 
       'password' : data.get('password'), 
       'confirmPassword' : data.get('confirmPassword'), 

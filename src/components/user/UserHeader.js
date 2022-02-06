@@ -21,6 +21,10 @@ function UserHeader(props) {
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '12em',
+        height: '12em',
       }}>
         {/* image */}
         <Box
@@ -29,7 +33,7 @@ function UserHeader(props) {
           alt='image'
           sx={{
             height: { xs: '8em', md: '10em' },
-            width: 'auto',
+            width: { xs: '8em', md: '10em' },
             minWidth: { xs: '8em', md: '10em' },
             borderRadius: '50%',
           }}
